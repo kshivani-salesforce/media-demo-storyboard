@@ -16,7 +16,7 @@ import Link from 'next/link';
 import { stages, type StageKey } from '@/lib/lifecycle';
 import { personas, findPersona } from '@/lib/storyboard';
 import { SafeImage } from './SafeImage';
-import { StickerIcon } from './StickerIcon';
+import { STICKER_SOURCES, type StickerKey } from './StickerIcon';
 
 // Wide-oval viewBox. 16:7 aspect.
 const VIEW = { w: 1600, h: 700 };
@@ -58,10 +58,15 @@ function pointAt(stage: StageKey) {
 
 export function LifecycleArc({
   litStages,
-  activeStage
+  activeStage,
+  reducedMotion = false
 }: {
   litStages: Set<StageKey>;
   activeStage?: StageKey;
+  // When true, the orbiting comet is suppressed. The looping CSS keyframes
+  // (breathe / orbit-dash) are handled by the prefers-reduced-motion rule in
+  // globals.css; this prop covers the SMIL comet, which CSS can't gate cleanly.
+  reducedMotion?: boolean;
 }) {
   const personaBySlug = useMemo(
     () => Object.fromEntries(personas.map((p) => [p.slug, p])),
@@ -157,6 +162,33 @@ export function LifecycleArc({
           opacity={0.85}
         />
 
+        {/* Comet: an amber pulse running clockwise along the loop. This is the
+            single clearest cue that the lifecycle is a directional, repeating
+            cycle. Pure SMIL animateMotion, declarative, off the main thread.
+            Path starts at the top and sweeps clockwise (sweep-flag 1). */}
+        {!reducedMotion && (
+          <g filter="url(#orbit-glow)">
+            <circle r={7} fill="#fce39a">
+              <animateMotion
+                dur="11s"
+                repeatCount="indefinite"
+                rotate="auto"
+                path={`M ${CENTRE.x},${CENTRE.y - RADIUS.y} A ${RADIUS.x},${RADIUS.y} 0 1 1 ${CENTRE.x},${CENTRE.y + RADIUS.y} A ${RADIUS.x},${RADIUS.y} 0 1 1 ${CENTRE.x},${CENTRE.y - RADIUS.y}`}
+              />
+            </circle>
+            {/* Faint trailing wake just behind the comet head. */}
+            <circle r={4} fill="rgba(240,180,0,0.55)">
+              <animateMotion
+                dur="11s"
+                repeatCount="indefinite"
+                rotate="auto"
+                begin="-0.22s"
+                path={`M ${CENTRE.x},${CENTRE.y - RADIUS.y} A ${RADIUS.x},${RADIUS.y} 0 1 1 ${CENTRE.x},${CENTRE.y + RADIUS.y} A ${RADIUS.x},${RADIUS.y} 0 1 1 ${CENTRE.x},${CENTRE.y - RADIUS.y}`}
+              />
+            </circle>
+          </g>
+        )}
+
         {/* Direction arrows on each segment */}
         {STAGE_ORDER.map((key, i) => {
           const a = STAGE_ANGLES[key];
@@ -178,7 +210,7 @@ export function LifecycleArc({
               key={`arrow-${key}`}
               points={`${x + dx},${y + dy} ${x - dx + px},${y - dy + py} ${x - dx - px},${y - dy - py}`}
               fill="#f0b400"
-              opacity={lit ? 0.7 : 0.25}
+              opacity={lit ? 0.92 : 0.35}
             />
           );
         })}
@@ -256,7 +288,7 @@ export function LifecycleArc({
           return (
             <div
               key={stage.key}
-              className={`absolute -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 ${
+              className={`absolute -translate-x-1/2 -translate-y-1/2 transition-opacity duration-[220ms] ease-out-strong ${
                 lit ? 'opacity-100' : 'opacity-30'
               }`}
               style={{ left: `${leftPct}%`, top: `${topPct}%` }}
@@ -427,12 +459,16 @@ function PersonaSmall({
   );
 }
 
+// One white bubble, the icon image rendered straight inside it. No nested
+// StickerIcon (that produced a white-on-white double circle and squished the
+// icon into an oval). `flex-none` + `object-contain` keep the icon round and
+// uncompressed inside the padded bubble.
 function ToolHead({
   sticker,
   tone,
   lit
 }: {
-  sticker: Parameters<typeof StickerIcon>[0]['icon'];
+  sticker: StickerKey;
   tone: { ring: string; soft: string };
   lit: boolean;
 }) {
@@ -448,7 +484,11 @@ function ToolHead({
         padding: 12
       }}
     >
-      <StickerIcon icon={sticker} size="md" />
+      <SafeImage
+        src={STICKER_SOURCES[sticker]}
+        alt=""
+        className="block h-full w-full flex-none object-contain"
+      />
     </div>
   );
 }
@@ -457,7 +497,7 @@ function ToolSmall({
   sticker,
   tone
 }: {
-  sticker: Parameters<typeof StickerIcon>[0]['icon'];
+  sticker: StickerKey;
   tone: { ring: string; soft: string };
 }) {
   return (
@@ -465,10 +505,14 @@ function ToolSmall({
       className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95"
       style={{
         boxShadow: `0 0 0 2px ${tone.ring}, 0 0 10px ${tone.soft}`,
-        padding: 5
+        padding: 6
       }}
     >
-      <StickerIcon icon={sticker} size="sm" />
+      <SafeImage
+        src={STICKER_SOURCES[sticker]}
+        alt=""
+        className="block h-full w-full flex-none object-contain"
+      />
     </div>
   );
 }

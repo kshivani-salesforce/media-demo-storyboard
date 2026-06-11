@@ -91,6 +91,13 @@ const config: Config = {
         'editorial':
           '0 1px 0 rgba(245,240,225,0.04) inset, 0 24px 48px -16px rgba(0,0,0,0.6), 0 4px 12px -2px rgba(0,0,0,0.4)'
       },
+      // Custom easing. The built-in CSS curves are too weak to read as
+      // intentional; these are the stronger ease-out / ease-in-out variants
+      // used on the lifecycle state transitions. Never ease-in on UI.
+      transitionTimingFunction: {
+        'out-strong': 'cubic-bezier(0.23, 1, 0.32, 1)',
+        'in-out-strong': 'cubic-bezier(0.77, 0, 0.175, 1)'
+      },
       animation: {
         'fade-in': 'fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both',
         'slide-up': 'slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both',

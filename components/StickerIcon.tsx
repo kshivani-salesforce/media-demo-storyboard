@@ -36,6 +36,14 @@ const SOURCES: Record<StickerKey, string> = {
   collaboration: '/icons/collaboration.png'
 };
 
+// Exported so surfaces that already supply their own bubble (e.g. the
+// LifecycleArc stage clusters) can render the raw icon image directly,
+// without nesting a second StickerIcon bubble inside theirs. Nesting two
+// bubbles squished the icon: the inner fixed-size bubble was wider than the
+// outer one's padded content box, so as a flex child it collapsed on the
+// main axis into an oval. Render the image straight into one bubble instead.
+export const STICKER_SOURCES = SOURCES;
+
 export function StickerIcon({
   icon,
   size = 'md',

@@ -7,6 +7,8 @@
 // No object names. If someone in the room asks what an AdQuoteLine is,
 // they're reading the wrong page.
 
+import type { StageKey } from '@/lib/lifecycle';
+
 export type JourneyNode = {
   id: string;
   // Display label on the node.
@@ -116,3 +118,22 @@ export const allVignetteIds = vignettes.map((v) => v.id);
 export function findVignette(id: string) {
   return vignettes.find((v) => v.id === id);
 }
+
+// Which lifecycle stage each journey node belongs to. Hand-authored (like
+// vignetteStageMap on the persona page) so stepping through a thread's moments
+// can light the exact stage on the loop for the moment you're on.
+export const nodeStageMap: Record<string, StageKey> = {
+  brief: 'discover',
+  'past-wins': 'discover',
+  'two-plans': 'plan',
+  picker: 'plan',
+  'channel-post': 'plan',
+  'calendar-check': 'launch',
+  'audience-tweak': 'launch',
+  'plan-locked': 'launch',
+  'campaign-live': 'launch',
+  pacing: 'monitor',
+  variance: 'monitor',
+  'cco-briefed': 'optimise',
+  win: 'optimise'
+};

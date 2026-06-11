@@ -46,3 +46,15 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Reduced motion: stop the looping ambient animations and the orbiting comet.
+   Opacity and colour transitions stay (reduced motion means less movement,
+   not none). The JS auto-walk and stepped Play are gated separately in the
+   component via a matchMedia hook. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-breathe,
+  .animate-orbit-dash,
+  .animate-float-slow {
+    animation: none !important;
+  }
+}
