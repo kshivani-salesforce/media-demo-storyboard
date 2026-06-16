@@ -155,16 +155,16 @@ export default function PersonaPage({
               <span className="h-px w-10 bg-phos-400/60" />
               <span className="eyebrow text-phos-400">{persona.role}</span>
             </div>
-            <h1 className="mt-6 font-display text-[88px] leading-[0.95] tracking-tight">
+            <h1 className="mt-6 font-display text-[88px] leading-[1.0]">
               {persona.name}.
             </h1>
-            <h2 className="mt-2 font-display italic text-[44px] leading-[1.05] phrase">
+            <h2 className="mt-3 font-display italic text-[44px] leading-[1.15] phrase">
               {persona.tagline}
             </h2>
-            <p className="mt-7 max-w-xl text-base leading-relaxed text-dark-inkMuted">
+            <p className="mt-7 max-w-2xl text-base leading-[1.7] text-dark-inkMuted">
               {persona.introParagraph}
             </p>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-dark-inkMuted">
+            <p className="mt-5 max-w-2xl text-base leading-[1.7] text-dark-inkMuted">
               {persona.dayParagraph}
             </p>
           </div>
@@ -206,7 +206,7 @@ export default function PersonaPage({
               <span className="h-px w-10 bg-phos-400/60" />
               <span className="eyebrow text-phos-400">The campaign lifecycle</span>
             </div>
-            <h2 className="mt-4 font-display text-[52px] leading-[0.95]">
+            <h2 className="mt-4 font-display text-[52px] leading-[1.08]">
               Where {persona.name} <span className="phrase italic">shows up.</span>
             </h2>
           </div>
@@ -276,10 +276,10 @@ export default function PersonaPage({
             <span className="h-px w-10 bg-phos-400/60" />
             <span className="eyebrow text-phos-400">{persona.name}&apos;s stories</span>
           </div>
-          <h2 className="mt-4 font-display text-[52px] leading-[0.95]">
+          <h2 className="mt-4 font-display text-[52px] leading-[1.08]">
             Pick a story to <span className="phrase italic">walk.</span>
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-dark-inkMuted">
+          <p className="mt-4 max-w-2xl text-base leading-[1.7] text-dark-inkMuted">
             Each story is one stretch of the loop. Step through it moment by
             moment and watch the loop above light the stage you&apos;re on.
           </p>
@@ -318,10 +318,10 @@ export default function PersonaPage({
                   {isActive ? 'Focused on the loop' : 'Focus the loop'}
                 </button>
               </div>
-              <h3 className="mt-4 font-display text-[40px] leading-[1.05]">
+              <h3 className="mt-4 font-display text-[40px] leading-[1.12]">
                 {v.title}
               </h3>
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-dark-inkMuted">
+              <p className="mt-4 max-w-3xl text-base leading-[1.7] text-dark-inkMuted">
                 {v.paragraph}
               </p>
 

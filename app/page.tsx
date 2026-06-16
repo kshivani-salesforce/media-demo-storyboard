@@ -20,12 +20,12 @@ export default function HomePage() {
           <div className="text-xs font-semibold uppercase tracking-[0.28em] text-sf-gold">
             Today&apos;s demonstration
           </div>
-          <h1 className="mt-5 font-display text-6xl font-bold leading-[1.05] tracking-tight">
+          <h1 className="mt-5 font-display text-6xl font-bold leading-[1.12]">
             One campaign.
             <br />
             <GradientText>Three lives changed.</GradientText>
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-dark-inkMuted">
+          <p className="mt-6 max-w-2xl text-lg leading-[1.7] text-dark-inkMuted">
             From the brief landing on Monday to the QBR on Friday: the full
             campaign lifecycle, told as one story. Pick the person whose day
             you want to walk.
@@ -73,7 +73,7 @@ export default function HomePage() {
 
       <footer className="border-t border-dark-border">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-6 text-xs text-dark-inkMuted">
-          <span>myRetailGoldenDemo · storyboard</span>
+          <span>Salesforce + Nine · Ad Sales in an Agentic Enterprise</span>
           <Link href="/architecture" className="hover:text-dark-ink">
             Architecture →
           </Link>

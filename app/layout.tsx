@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Demo Storyboard',
+  title: 'Ad Sales in an Agentic Enterprise · Salesforce + Nine',
   description:
-    'Storyboard surface for the myRetailGoldenDemo Media Cloud / Ad Sales narrative: personas and demo vignettes.'
+    'Storyboard surface for the Salesforce + Nine Ad Sales narrative: personas and the campaign lifecycle, in an agentic enterprise.'
 };
 
 export default function RootLayout({

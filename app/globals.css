@@ -10,6 +10,21 @@ body {
 body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Open, breathable base register (matches the Driva v2 reference). Body
+     copy gets a comfortable line-height rather than the crushed default. */
+  line-height: 1.6;
+}
+
+/* Instrument Serif is a high-contrast display serif and is already tightly
+   spaced; negative tracking + sub-1.0 line-height crushes it. Give the
+   display headings room by DEFAULT: neutral tracking and a line-height that
+   lets multi-line headings breathe. In @layer base so any per-element
+   `leading-*` / `tracking-*` utility still overrides it. */
+@layer base {
+  .font-display {
+    letter-spacing: 0;
+    line-height: 1.12;
+  }
 }
 
 /* Subtle film-grain texture used over the editorial dark surfaces. SVG

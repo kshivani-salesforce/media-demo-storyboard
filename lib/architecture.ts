@@ -1,14 +1,19 @@
 // Agentic Media Enterprise Architecture, faithful to the canonical
 // Salesforce slide (see design/architecture-reference.png).
 //
-// Five horizontal bands, each with a left-side label and a right-side
-// "Any X" capability label, plus a Trust Layer footer.
+// FOUR Salesforce bands sit inside the trust boundary, each with a
+// left-side label and a right-side "Any X" capability label:
 //
 //   System of engagement -> "Any workspace"  (Slack, Canvas, Messaging)
 //   System of agency     -> "Any agent"      (Agentforce for M&E)
 //   System of work       -> "Any app"        (Customer 360: Sales/Service/Marketing/...)
 //   System of context    -> "Any data lake"  (Data 360)
-//   Trust layer          -> "Open source"    (OpenAI, Anthropic, Gemini, LLaMa, etc.)
+//
+// The Trust Layer is NOT a fifth peer band. It is the MEMBRANE between the
+// governed Salesforce estate above and the external model providers below:
+// nothing reaches a provider except through it. It is modelled separately
+// (`trustLayer` + `modelProviders`) so it can be rendered as a boundary,
+// not just another row.
 //
 // Each component carries a `vignettes` list. When a story vignette "lights
 // up" some part of the architecture, those components glow and the rest
@@ -19,8 +24,7 @@ export type SystemKey =
   | 'engagement'
   | 'agency'
   | 'work'
-  | 'context'
-  | 'trust';
+  | 'context';
 
 export type ArchComponent = {
   // Display label as it appears on the chip.
@@ -135,23 +139,49 @@ export const bands: ArchBand[] = [
       { label: 'Live performance feed', caption: 'Pacing + delivery', vignettes: ['variance-watch', 'cco-briefed'] },
       { label: 'Federation · zero copy · real time' }
     ]
-  },
-  {
-    key: 'trust',
-    index: 5,
-    rail: 'Trust layer',
-    capability: 'Open source',
-    title: 'Trust layer',
-    subline: 'Grounding · masking · audit · model partner choice',
-    tone: '#1a1530',
-    components: [
-      { label: 'OpenAI' },
-      { label: 'Anthropic' },
-      { label: 'Gemini' },
-      { label: 'LLaMa' },
-      { label: 'Open source' }
-    ]
   }
+];
+
+// The Trust Layer: the membrane between the governed Salesforce estate and
+// any external model. This is the headline message of the whole diagram, so
+// it gets its own structure rather than being a peer band.
+export const trustLayer = {
+  // The claim, stated plainly.
+  headline: 'Trust by construction, not by audit.',
+  // How the claim is delivered. Kept to one tight line: this is a quiet
+  // guarantee, not a narrative beat.
+  body:
+    'Your policies, sharing rules and Flow logic still govern every action. Nothing reaches an external model except through here, and it never sees raw customer data.',
+  // The two sides the membrane sits between (used for the boundary labels).
+  insideLabel: 'Inside your Salesforce trust boundary',
+  outsideLabel: 'External models · called through the trust layer, never handed raw data',
+  // What the layer actually does, as short tokens.
+  guarantees: ['Grounding', 'Dynamic masking', 'Zero retention', 'Full audit trail', 'Model-partner choice']
+};
+
+export type ModelProvider = {
+  // Display name (fallback when no logo asset is supplied).
+  name: string;
+  // White / monochrome transparent logo under /public/icons. Drop the file
+  // in and set this path; until then the name renders as a wordmark chip.
+  logo?: string;
+};
+
+// External model providers reachable ONLY through the trust layer.
+//
+// Logo notes:
+//  - openai.svg : monochrome, recoloured white to read on the dark row.
+//  - meta.png   : Meta infinity mark (blue), stands in for LLaMA.
+//  - mistral.png: the orange pixel-castle mark, colour, reads on dark.
+//  - Anthropic & Gemini render as wordmarks until white / transparent
+//    variants are supplied (the files on hand are dark-on-light, which
+//    disappears on the dark trust-layer row).
+export const modelProviders: ModelProvider[] = [
+  { name: 'OpenAI', logo: '/icons/openai.svg' },
+  { name: 'Anthropic' },
+  { name: 'Gemini' },
+  { name: 'LLaMA', logo: '/icons/meta.png' },
+  { name: 'Mistral', logo: '/icons/mistral.png' }
 ];
 
 // Helper: which bands have at least one component lit by a given vignette?

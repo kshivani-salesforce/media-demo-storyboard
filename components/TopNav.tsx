@@ -3,7 +3,7 @@
 // highlighted.
 
 import Link from 'next/link';
-import { SafeImage } from './SafeImage';
+import { BrandLockup } from './BrandLockup';
 
 type NavKey = 'personas' | 'architecture' | 'vignettes';
 
@@ -16,15 +16,8 @@ const TABS: { key: NavKey; label: string; href: string }[] = [
 export function TopNav({ active }: { active?: NavKey }) {
   return (
     <nav className="relative z-30 mx-auto flex max-w-7xl items-center justify-between px-8 py-6">
-      <Link href="/" className="flex items-center gap-3">
-        <SafeImage
-          src="/icons/salesforce-cloud-logo.svg"
-          alt="Salesforce"
-          className="h-7 w-auto opacity-95"
-        />
-        <span className="font-display text-sm font-semibold tracking-wide text-dark-ink">
-          myRetailGoldenDemo
-        </span>
+      <Link href="/" className="flex items-center">
+        <BrandLockup />
       </Link>
       <div className="flex items-center gap-1 rounded-full bg-dark-surface px-1.5 py-1.5 ring-1 ring-dark-border">
         {TABS.map((t) => {
