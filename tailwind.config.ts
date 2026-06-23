@@ -62,12 +62,11 @@ const config: Config = {
         }
       },
       fontFamily: {
-        // Editorial serif for display. Instrument Serif has high contrast and
-        // a distinctive italic, which gives the page real character.
-        display: ['"Instrument Serif"', 'Georgia', 'serif'],
-        // Geometric grotesque for body. DM Sans is clean and modern without
-        // being the obvious "AI font" (Inter / Roboto / Space Grotesk).
-        sans: ['"DM Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        // Matched to the agentic-ad-sales-specs storyboard: Inter carries both
+        // display and body (weights to 800 for the heavy headlines). Wider and
+        // more open than DM Sans, so the copy stops reading squished.
+        display: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
       },
       backgroundImage: {

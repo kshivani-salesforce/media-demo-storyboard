@@ -15,14 +15,12 @@ body {
   line-height: 1.6;
 }
 
-/* Instrument Serif is a high-contrast display serif and is already tightly
-   spaced; negative tracking + sub-1.0 line-height crushes it. Give the
-   display headings room by DEFAULT: neutral tracking and a line-height that
-   lets multi-line headings breathe. In @layer base so any per-element
-   `leading-*` / `tracking-*` utility still overrides it. */
+/* Display headings run in Inter. Give multi-line headings room by DEFAULT:
+   neutral tracking and a line-height that lets them breathe. In @layer base so
+   any per-element `leading-*` / `tracking-*` utility still overrides it. */
 @layer base {
   .font-display {
-    letter-spacing: 0;
+    letter-spacing: -0.01em;
     line-height: 1.12;
   }
 }
@@ -52,10 +50,9 @@ body {
   text-transform: uppercase;
 }
 
-/* Reusable italic phrase: serif italic over a phosphor wash. */
+/* Reusable phrase: phosphor-washed emphasis text (Inter, matching the
+   reference storyboard). Components add `italic` explicitly where wanted. */
 .phrase {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-style: italic;
   background: linear-gradient(180deg, #f5c76a 0%, #f0b400 100%);
   -webkit-background-clip: text;
   background-clip: text;

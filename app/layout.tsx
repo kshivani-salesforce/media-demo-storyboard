@@ -12,9 +12,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Editorial pairing: Instrument Serif (display) + DM Sans (body). Picked
-  // deliberately to avoid the generic Inter / Plus Jakarta Sans / Space
-  // Grotesk look that signals AI-generated product pages.
+  // Typeface matched to the agentic-ad-sales-specs storyboard: Inter for
+  // display + body (weights to 800 for heavy headlines) + JetBrains Mono for
+  // the mono "receipts". Inter is wider and more open than DM Sans, so the
+  // copy no longer reads squished.
   return (
     <html lang="en">
       <head>
@@ -25,7 +26,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
       </head>
