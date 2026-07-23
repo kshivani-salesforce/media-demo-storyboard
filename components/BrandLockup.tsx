@@ -17,6 +17,9 @@ export function BrandLockup({
   className?: string;
 }) {
   const logoH = size === 'sm' ? 'h-6' : 'h-7';
+  // The Nine mark is a wide landscape wordmark (760×230 ≈ 3.3:1), so run it a
+  // touch shorter than the Salesforce cloud to balance the optical weight.
+  const nineH = size === 'sm' ? 'h-4' : 'h-5';
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <SafeImage
@@ -28,7 +31,7 @@ export function BrandLockup({
       <SafeImage
         src="/icons/nine-logo.png"
         alt="Nine"
-        className={`${logoH} w-auto opacity-95`}
+        className={`${nineH} w-auto opacity-95`}
       />
       {showTitle && (
         <>

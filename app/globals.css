@@ -50,10 +50,10 @@ body {
   text-transform: uppercase;
 }
 
-/* Reusable phrase: phosphor-washed emphasis text (Inter, matching the
-   reference storyboard). Components add `italic` explicitly where wanted. */
+/* Reusable phrase: Electric-Blue-washed emphasis text (Inter). Components add
+   `italic` explicitly where wanted. */
 .phrase {
-  background: linear-gradient(180deg, #f5c76a 0%, #f0b400 100%);
+  background: linear-gradient(180deg, #3d8bfe 0%, #066afe 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

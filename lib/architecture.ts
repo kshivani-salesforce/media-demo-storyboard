@@ -15,10 +15,10 @@
 // (`trustLayer` + `modelProviders`) so it can be rendered as a boundary,
 // not just another row.
 //
-// Each component carries a `vignettes` list. When a story vignette "lights
-// up" some part of the architecture, those components glow and the rest
-// dim. The light/dim mechanic is what makes this page useful as a story
-// aid, not just a poster.
+// Each component carries a `beats` list of story-beat ids (lib/story.ts).
+// When a story beat "lights up" some part of the architecture, those
+// components glow and the rest dim. The light/dim mechanic is what makes this
+// page useful as a story aid, not just a poster.
 
 export type SystemKey =
   | 'engagement'
@@ -32,8 +32,8 @@ export type ArchComponent = {
   // Image asset under /public/icons. If a SVG/PNG isn't provided, we fall
   // back to a coloured dot.
   icon?: string;
-  // Vignette IDs in lib/journey.ts that exercise this component.
-  vignettes?: string[];
+  // Story-beat ids in lib/story.ts that exercise this component.
+  beats?: string[];
   // Optional muted helper text (for Customer 360 sub-apps with two lines).
   caption?: string;
 };
@@ -65,11 +65,12 @@ export const bands: ArchBand[] = [
     subline: 'Slackbot · Canvas · Enterprise Search · Messaging & Huddles · Tableau Viz · Data Q&A',
     tone: '#4a154b',
     components: [
-      { label: 'Slackbot', icon: '/icons/slack-3d.png', vignettes: ['variance-watch', 'audience-on-the-fly'] },
-      { label: 'Canvas', vignettes: ['audience-on-the-fly'] },
-      { label: 'Enterprise Search', vignettes: ['past-wins'] },
+      { label: 'In-Person Meeting Capture', icon: '/icons/slack-3d.png', caption: 'The face-to-face meeting, captured on mobile', beats: ['conversation'] },
+      { label: 'Slackbot', icon: '/icons/slack-3d.png', caption: 'The team channel where agents post and hand off', beats: ['command-center', 'monitor'] },
+      { label: 'Canvas', beats: ['monitor'] },
+      { label: 'Enterprise Search', beats: ['deal-focus'] },
       { label: 'Messaging & Huddles' },
-      { label: 'Tableau Viz · Data Q&A' }
+      { label: 'Tableau Viz · Data Q&A', beats: ['command-center'] }
     ]
   },
   {
@@ -82,28 +83,34 @@ export const bands: ArchBand[] = [
     tone: '#0d61f2',
     components: [
       {
-        label: 'Past-campaign Citation',
-        icon: '/icons/media.svg',
-        caption: 'Surfaces the closest analogue from last year, with citations',
-        vignettes: ['brief-arrives', 'past-wins']
+        label: 'Meeting 360 Intelligence',
+        icon: '/icons/agentforce.png',
+        caption: 'Reads the call: summary, signals, objections, next steps, sentiment, the brief',
+        beats: ['conversation']
       },
       {
-        label: 'Ad Proposal Builder',
-        icon: '/icons/media.svg',
-        caption: 'Drafts side-by-side plans, then commits the curated picker',
-        vignettes: ['brief-arrives', 'two-plans-side-by-side']
+        label: 'RFP Agent',
+        icon: '/icons/agentforce.png',
+        caption: 'Reads the RFP document and stands up the Opportunity + structured records',
+        beats: ['rfp']
       },
       {
-        label: 'Ad Inventory Advisor',
+        label: 'Account Briefing Agent',
+        icon: '/icons/agentforce.png',
+        caption: 'Assembles who the customer is and what matters to them, on the deal',
+        beats: ['deal-focus']
+      },
+      {
+        label: 'Ad Proposal Agent',
         icon: '/icons/media.svg',
-        caption: 'Maps audience asks to live segments and lands lines on the plan',
-        vignettes: ['audience-on-the-fly']
+        caption: 'Optimises the schedule for reach against the objective: product mix + budget split',
+        beats: ['proposal']
       },
       {
         label: 'Campaign Performance Monitor',
         icon: '/icons/media.svg',
-        caption: 'Watches every campaign overnight, names the drag, posts to Slack',
-        vignettes: ['variance-watch']
+        caption: 'Watches delivery, names the drift before anyone asks, posts to the team',
+        beats: ['monitor', 'conversation']
       }
     ]
   },
@@ -116,11 +123,14 @@ export const bands: ArchBand[] = [
     subline: 'Audience · Subscriptions · Predictive Modelling · Workflow Orchestration · Audience & Behavioural Personalisation · Partner & Customer Communities',
     tone: '#5b8def',
     components: [
-      { label: 'Ad Sales Mgmt', icon: '/icons/media.svg', caption: 'The proposal · the plan · the calendar', vignettes: ['brief-arrives', 'two-plans-side-by-side', 'pick-the-plan', 'calendar-check', 'campaign-live'] },
+      { label: 'Opportunity & Records', icon: '/icons/media.svg', caption: 'The deal the RFP agent stands up: Opportunity + structured records', beats: ['rfp'] },
+      { label: 'Ad Sales Command Center', icon: '/icons/media.svg', caption: 'The book of business view; agents already at work', beats: ['command-center'] },
+      { label: 'Account Brief & Customer Intelligence', caption: 'The homework, assembled on the Opportunity', beats: ['deal-focus'] },
+      { label: 'Ad Sales Mgmt', icon: '/icons/media.svg', caption: 'The proposal · the media plan · the calendar', beats: ['proposal', 'booked'] },
+      { label: 'Quote / Media Plan', caption: 'The proposal becomes a bookable plan', beats: ['booked'] },
       { label: 'Subscriber Lifecycle', caption: 'Loyalty + retention motion' },
       { label: 'Predictive Modelling', caption: 'Demand forecast inputs' },
-      { label: 'Workflow Orchestration', caption: 'The shared spine', vignettes: ['variance-watch', 'cco-briefed'] },
-      { label: 'Audience & Personalisation', caption: 'Behavioural taxonomy', vignettes: ['audience-on-the-fly'] },
+      { label: 'Workflow Orchestration', caption: 'The shared spine', beats: ['command-center', 'monitor'] },
       { label: 'Partner & Customer Communities' },
       { label: 'Sales · Service · Marketing · Commerce · Revenue · Platform' }
     ]
@@ -132,11 +142,12 @@ export const bands: ArchBand[] = [
     capability: 'Any data lake or warehouse',
     title: 'Data 360',
     subline: 'CDP · Federation · Informatica · Tableau · Structured & Unstructured · Zero copy · Real time',
-    tone: '#a06cd5',
+    tone: '#3d8bfe',
     components: [
-      { label: 'Past wins library', icon: '/icons/data360.png', caption: 'Last year, last quarter, last decade', vignettes: ['past-wins'] },
-      { label: 'Audience graph', icon: '/icons/data360.png', caption: 'Who, where, when', vignettes: ['audience-on-the-fly'] },
-      { label: 'Live performance feed', caption: 'Pacing + delivery', vignettes: ['variance-watch', 'cco-briefed'] },
+      { label: 'Conversation signals', icon: '/icons/data360.png', caption: 'Every captured call, harmonised into the customer picture', beats: ['conversation', 'deal-focus'] },
+      { label: 'Account & campaign history', icon: '/icons/data360.png', caption: 'What this customer has run before, grounding the brief', beats: ['deal-focus'] },
+      { label: 'Audience graph', icon: '/icons/data360.png', caption: 'Who, where, when, feeding the targeting', beats: ['proposal'] },
+      { label: 'Live performance feed', caption: 'Pacing + delivery', beats: ['monitor', 'command-center'] },
       { label: 'Federation · zero copy · real time' }
     ]
   }
@@ -184,23 +195,23 @@ export const modelProviders: ModelProvider[] = [
   { name: 'Mistral', logo: '/icons/mistral.png' }
 ];
 
-// Helper: which bands have at least one component lit by a given vignette?
-export function bandsLitByVignette(vignetteId: string): Set<SystemKey> {
+// Helper: which bands have at least one component lit by a given beat?
+export function bandsLitByBeat(beatId: string): Set<SystemKey> {
   const out = new Set<SystemKey>();
   for (const band of bands) {
-    if (band.components.some((c) => c.vignettes?.includes(vignetteId))) {
+    if (band.components.some((c) => c.beats?.includes(beatId))) {
       out.add(band.key);
     }
   }
   return out;
 }
 
-// Helper: every component-id (band+label) lit by a given vignette.
-export function componentsLitByVignette(vignetteId: string): Set<string> {
+// Helper: every component-id (band+label) lit by a given beat.
+export function componentsLitByBeat(beatId: string): Set<string> {
   const out = new Set<string>();
   for (const band of bands) {
     for (const c of band.components) {
-      if (c.vignettes?.includes(vignetteId)) {
+      if (c.beats?.includes(beatId)) {
         out.add(`${band.key}:${c.label}`);
       }
     }

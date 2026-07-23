@@ -5,12 +5,11 @@
 import Link from 'next/link';
 import { BrandLockup } from './BrandLockup';
 
-type NavKey = 'personas' | 'architecture' | 'vignettes';
+type NavKey = 'story' | 'architecture';
 
 const TABS: { key: NavKey; label: string; href: string }[] = [
-  { key: 'personas', label: 'Personas', href: '/' },
-  { key: 'architecture', label: 'Architecture', href: '/architecture' },
-  { key: 'vignettes', label: 'Vignettes', href: '/#vignettes' }
+  { key: 'story', label: 'The story', href: '/' },
+  { key: 'architecture', label: 'Architecture', href: '/architecture' }
 ];
 
 export function TopNav({ active }: { active?: NavKey }) {

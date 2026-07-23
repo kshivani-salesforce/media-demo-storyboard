@@ -6,13 +6,27 @@ import {
   bands,
   trustLayer,
   modelProviders,
-  componentsLitByVignette,
+  componentsLitByBeat,
   type ArchBand
 } from '@/lib/architecture';
-import { vignettes } from '@/lib/journey';
+import { story } from '@/lib/story';
 import { TopNav } from '@/components/TopNav';
 import { GradientText } from '@/components/GradientText';
 import { BrandLockup } from '@/components/BrandLockup';
+
+// The switcher lights the architecture by story beat: each beat's id is the
+// tag its participating components carry (lib/architecture.ts `beats`). Short
+// pill labels keyed off the beat id so the strip stays tidy.
+const BEAT_PILLS: Record<string, string> = {
+  conversation: 'Conversation',
+  rfp: 'RFP → deal',
+  'command-center': 'Command Center',
+  'deal-focus': 'Deal in focus',
+  proposal: 'Optimise schedule',
+  booked: 'Booked',
+  monitor: 'Monitor'
+};
+const archThreads = story.map((b) => ({ id: b.id, pill: BEAT_PILLS[b.id] ?? b.title }));
 
 // /architecture
 //
@@ -27,11 +41,11 @@ import { BrandLockup } from '@/components/BrandLockup';
 // A pill switcher above the diagram lets you focus a vignette;
 // non-participating components dim to ~25% opacity.
 
-type FocusKey = string; // vignette id, or 'all'
+type FocusKey = string; // beat id, or 'all'
 
 export default function ArchitecturePage() {
   const [focus, setFocus] = useState<FocusKey>('all');
-  const litComponentIds = focus === 'all' ? null : componentsLitByVignette(focus);
+  const litComponentIds = focus === 'all' ? null : componentsLitByBeat(focus);
 
   const isLit = (band: ArchBand, label: string) => {
     if (!litComponentIds) return true;
@@ -72,7 +86,7 @@ export default function ArchitecturePage() {
           >
             All threads lit
           </button>
-          {vignettes.map((v) => {
+          {archThreads.map((v) => {
             const isActive = v.id === focus;
             return (
               <button
