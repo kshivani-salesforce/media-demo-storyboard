@@ -34,10 +34,15 @@ export function PersonaTile({
         />
         {/* Bottom scrim so the name reads over any photo */}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-dark-surface via-dark-surface/60 to-transparent" />
-        {/* Sticker, floating in the corner */}
-        <div className="absolute -bottom-5 right-4">
-          <StickerIcon icon={persona.sticker} size="md" float />
-        </div>
+      </div>
+
+      {/* Sticker, floating on the seam between photo and caption. Positioned at
+          the Link level (not inside the portrait) so it isn't clipped by the
+          portrait's overflow-hidden. Offset from the top by the portrait
+          height (h-56 = 14rem) less part of the sticker so it hangs over the
+          seam. */}
+      <div className="pointer-events-none absolute right-4 top-[calc(14rem-2.75rem)] z-10">
+        <StickerIcon icon={persona.sticker} size="md" float />
       </div>
 
       {/* Caption */}
