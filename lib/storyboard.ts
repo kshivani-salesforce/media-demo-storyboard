@@ -7,7 +7,7 @@
 
 import type { StickerKey } from '@/components/StickerIcon';
 
-export type PersonaSlug = 'mark' | 'suzie' | 'cindy';
+export type PersonaSlug = 'mark' | 'hannah' | 'cindy';
 
 export type Persona = {
   slug: PersonaSlug;
@@ -37,15 +37,15 @@ export const personas: Record<PersonaSlug, Persona> = {
     entryLine:
       "Mark sells media for Nine. He carries the relationship, the number, and every deal in his book. The demo is his day."
   },
-  suzie: {
-    slug: 'suzie',
-    name: 'Suzie',
+  hannah: {
+    slug: 'hannah',
+    name: 'Hannah',
     role: 'Advertiser',
-    photo: '/personas/suzie.jpg',
+    photo: '/personas/hannah.jpg',
     photoFocus: '75% 28%',
     sticker: 'slack-3d',
     entryLine:
-      "Suzie is the advertiser. She runs paid media for the apparel brand, carries the campaign to her board, and reads every conversation as a promise. She stays because Mark keeps them."
+      "Hannah is the advertiser. She runs paid media for the apparel brand, carries the campaign to her board, and reads every conversation as a promise. She stays because Mark keeps them."
   },
   cindy: {
     slug: 'cindy',

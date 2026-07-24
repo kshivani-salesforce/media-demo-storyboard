@@ -82,10 +82,10 @@ export const story: StoryBeat[] = [
     chapter: 'conversation',
     title: 'It starts with a conversation',
     scene:
-      "Mark and Suzie review the live campaign. There's a variance, but Mark is already on top of it, and because the conversation goes so well, Suzie trusts him with the brief for the next one: $1.5M, winter, three months. The whole call is captured and turned into intelligence, nobody takes a note.",
+      "Mark and Hannah review the live campaign. There's a variance, but Mark is already on top of it, and because the conversation goes so well, Hannah trusts him with the brief for the next one: $1.5M, winter, three months. The whole call is captured and turned into intelligence, nobody takes a note.",
     onScreen: 'The meeting, captured on mobile → summary, next steps, sentiment, the brief.',
-    entersHere: ['mark', 'suzie'],
-    focus: ['mark', 'suzie']
+    entersHere: ['mark', 'hannah'],
+    focus: ['mark', 'hannah']
   },
   {
     id: 'rfp',
@@ -127,9 +127,9 @@ export const story: StoryBeat[] = [
     chapter: 'booked',
     title: 'A few days later, it books',
     scene:
-      "The proposal becomes a quote, a media plan Suzie can say yes to. She does. The plan is booked and the campaign is on its way, the promise from that first conversation now on the calendar.",
+      "The proposal becomes a quote, a media plan Hannah can say yes to. She does. The plan is booked and the campaign is on its way, the promise from that first conversation now on the calendar.",
     onScreen: 'The Quote / Media Plan → booked.',
-    focus: ['suzie']
+    focus: ['hannah']
   },
   {
     id: 'monitor',

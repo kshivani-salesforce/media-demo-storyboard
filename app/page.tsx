@@ -11,7 +11,7 @@ import { PersonaTile } from '@/components/PersonaTile';
 // Chapter I. The story itself is walked chapter by chapter (/story/1..3) with
 // forward buttons; the full recap lives on /story. No spine on this page.
 
-const castOrder = [personas.mark, personas.suzie, personas.cindy];
+const castOrder = [personas.mark, personas.hannah, personas.cindy];
 
 export default function LandingPage() {
   return (
