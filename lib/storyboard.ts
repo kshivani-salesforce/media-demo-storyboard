@@ -45,7 +45,7 @@ export const personas: Record<PersonaSlug, Persona> = {
     photoFocus: '75% 28%',
     sticker: 'slack-3d',
     entryLine:
-      "Hannah is the advertiser. She runs paid media for the apparel brand, carries the campaign to her board, and reads every conversation as a promise. She stays because Mark keeps them."
+      "Hannah is the advertiser. She runs paid media for Macpac, carries the campaign to her board, and reads every conversation as a promise. She stays because Mark keeps them."
   },
   cindy: {
     slug: 'cindy',
