@@ -3,24 +3,15 @@ import type { Persona } from '@/lib/storyboard';
 import { SafeImage } from './SafeImage';
 import { StickerIcon } from './StickerIcon';
 
-// Cast tile. Belongs to the one story spine, it is NOT a second navigation
-// system. Clicking a tile scrolls to the beat where that person walks into the
-// story (in-page anchor), so the tiles are the cast lineup and the spine is
-// still the only journey. The pizazz (portrait, sticker, hover lift) without a
-// competing metaphor.
+// Cast tile on the landing page. This is the meet-the-cast moment: portrait,
+// role, and the persona's one-line intro. Every tile opens the story at
+// Chapter I, the story is one linear walk, not three separate journeys, so the
+// tiles are the lineup and the forward buttons drive the path.
 
-export function PersonaTile({
-  persona,
-  entersAtBeatId,
-  entersAtNumber
-}: {
-  persona: Persona;
-  entersAtBeatId: string;
-  entersAtNumber: number;
-}) {
+export function PersonaTile({ persona }: { persona: Persona }) {
   return (
     <Link
-      href={`#beat-${entersAtBeatId}`}
+      href="/story/1"
       className="group relative block overflow-hidden rounded-[20px] bg-dark-surface ring-1 ring-dark-border shadow-editorial transition-transform duration-300 ease-out-strong hover:-translate-y-1.5"
     >
       {/* Portrait */}
@@ -51,15 +42,9 @@ export function PersonaTile({
           {persona.name}
         </div>
         <div className="eyebrow mt-1 text-dark-inkMuted">{persona.role}</div>
-        <div className="mt-3 flex items-center gap-2 text-phos-400">
-          <span className="eyebrow">
-            Enters · beat {String(entersAtNumber).padStart(2, '0')}
-          </span>
-          <span className="h-px flex-1 bg-phos-400/25" />
-          <span className="text-sm transition-transform duration-300 group-hover:translate-x-0.5">
-            →
-          </span>
-        </div>
+        <p className="mt-3 text-sm leading-relaxed text-dark-ink/80">
+          {persona.entryLine}
+        </p>
       </div>
     </Link>
   );

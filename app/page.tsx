@@ -1,73 +1,22 @@
 import Link from 'next/link';
-import { story, coda, chapters, personaEntryBeats } from '@/lib/story';
-import { personas, type PersonaSlug } from '@/lib/storyboard';
+import { chapters } from '@/lib/story';
+import { personas } from '@/lib/storyboard';
 import { GradientText } from '@/components/GradientText';
 import { Sparkles } from '@/components/Sparkles';
 import { TopNav } from '@/components/TopNav';
-import { SafeImage } from '@/components/SafeImage';
 import { PersonaTile } from '@/components/PersonaTile';
 
-// Home page: the whole demo as one vertical story spine. Read top to bottom.
-// Seven beats on a single connecting line, grouped into three chapters;
-// personas walk in inline the first time each one enters. No loop, no
-// serpentine, no step machinery, one metaphor, one page. The "how" (products
-// per beat) lives on /architecture.
+// Landing page: meet the cast, then begin. The three persona tiles introduce
+// the people, a short intro frames the deal, and "Begin the story" opens
+// Chapter I. The story itself is walked chapter by chapter (/story/1..3) with
+// forward buttons; the full recap lives on /story. No spine on this page.
 
-// A small portrait + intro block, rendered inline when a persona first enters.
-function PersonaIntro({ slug }: { slug: PersonaSlug }) {
-  const p = personas[slug];
-  return (
-    <div className="flex items-start gap-4 rounded-2xl bg-dark-surface/70 p-4 ring-1 ring-dark-border">
-      <div
-        className="relative h-16 w-16 flex-none overflow-hidden rounded-full"
-        style={{ boxShadow: '0 0 0 2px rgba(61,139,254,0.5)' }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-dark-surfaceLift to-dark-surface" />
-        <SafeImage
-          src={p.photo}
-          alt={p.name}
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition: p.photoFocus }}
-        />
-      </div>
-      <div>
-        <div className="flex items-baseline gap-2">
-          <span className="font-display text-lg text-dark-ink">{p.name}</span>
-          <span className="eyebrow text-phos-400">meet</span>
-        </div>
-        <div className="eyebrow mt-0.5 text-dark-inkMuted">{p.role}</div>
-        <p className="mt-2 max-w-xl text-sm leading-relaxed text-dark-ink/85">
-          {p.entryLine}
-        </p>
-      </div>
-    </div>
-  );
-}
+const castOrder = [personas.mark, personas.suzie, personas.cindy];
 
-// A chapter heading, rendered before the first beat of each chapter. Sits to
-// the left of the node column so it reads as a section break in the spine.
-function ChapterHeading({ numeral, title }: { numeral: string; title: string }) {
-  return (
-    <div className="relative pb-8 pl-14 pt-2 sm:pl-16">
-      <div className="flex items-center gap-3">
-        <span className="eyebrow text-phos-400">Chapter {numeral}</span>
-        <span className="h-px flex-1 bg-dark-border" />
-      </div>
-      <h2 className="mt-2 font-display text-2xl font-bold text-dark-ink sm:text-[28px]">
-        {title}
-      </h2>
-    </div>
-  );
-}
-
-export default function HomePage() {
-  const lastIndex = story.length - 1;
-  const cast = personaEntryBeats();
-  const chapterTitle = (key: string) => chapters.find((c) => c.key === key);
-
+export default function LandingPage() {
   return (
     <main className="relative min-h-screen bg-sf-dark-wash text-dark-ink">
-      <TopNav active="story" />
+      <TopNav />
 
       {/* Hero */}
       <section className="relative mx-auto max-w-5xl px-8 pt-10 pb-10">
@@ -79,116 +28,70 @@ export default function HomePage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-[1.7] text-dark-inkMuted">
             From the conversation that starts it to the campaign that runs
-            itself, one story, told once. Seven beats, three chapters. Read it
-            top to bottom.
+            itself, one story, told once. Three chapters. Meet the three people
+            you will follow, then walk it beat by beat.
           </p>
         </div>
       </section>
 
-      {/* The cast — pizazz, but wired to the spine: each tile scrolls to the
-          beat where that person walks in. */}
-      <section className="relative mx-auto max-w-5xl px-8 pb-14">
+      {/* The cast */}
+      <section className="relative mx-auto max-w-5xl px-8 pb-12">
         <div className="mb-5 flex items-center gap-3">
           <span className="eyebrow text-phos-400">The cast</span>
           <span className="h-px flex-1 bg-dark-border" />
           <span className="eyebrow text-dark-inkMuted">
-            three people, met in the story
+            three people, one deal
           </span>
         </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-          {cast.map(({ slug, beat, number }) => (
-            <PersonaTile
-              key={slug}
-              persona={personas[slug]}
-              entersAtBeatId={beat.id}
-              entersAtNumber={number}
-            />
+          {castOrder.map((persona) => (
+            <PersonaTile key={persona.slug} persona={persona} />
           ))}
         </div>
       </section>
 
-      {/* The spine */}
-      <section className="relative mx-auto max-w-5xl px-8 pb-10">
-        <ol className="relative">
-          {/* The connecting line runs behind the node column. */}
-          <span
-            aria-hidden
-            className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-phos-400/50 via-phos-500/40 to-phos-700/30 sm:left-[23px]"
-          />
-
-          {story.map((beat, i) => {
-            const isChapterStart =
-              i === 0 || story[i - 1].chapter !== beat.chapter;
-            const chapter = chapterTitle(beat.chapter);
-            return (
-              <li key={beat.id} className="relative">
-                {isChapterStart && chapter && (
-                  <ChapterHeading
-                    numeral={chapter.numeral}
-                    title={chapter.title}
-                  />
-                )}
-
-                <div
-                  id={`beat-${beat.id}`}
-                  className="relative scroll-mt-28 pl-14 pb-12 sm:pl-16"
+      {/* The chapters + begin */}
+      <section className="relative mx-auto max-w-5xl px-8 pb-14">
+        <div className="rounded-3xl bg-dark-surface/80 p-8 ring-1 ring-dark-border md:p-10">
+          <div className="mb-6 flex items-center gap-3">
+            <span className="eyebrow text-phos-400">Three chapters</span>
+            <span className="h-px flex-1 bg-dark-border" />
+          </div>
+          <ol className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            {chapters.map((c, i) => (
+              <li key={c.key}>
+                <Link
+                  href={`/story/${i + 1}`}
+                  className="group block h-full rounded-2xl bg-dark-canvas/50 p-5 ring-1 ring-dark-border transition-transform duration-300 ease-out-strong hover:-translate-y-1"
                 >
-                  {/* Node */}
-                  <span
-                    className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full font-display text-base font-semibold sm:h-12 sm:w-12"
-                    style={{
-                      background: i === lastIndex ? '#066afe' : 'rgba(6,106,254,0.16)',
-                      color: i === lastIndex ? '#ffffff' : '#a8cbff',
-                      boxShadow: '0 0 0 1px rgba(61,139,254,0.45), 0 0 24px rgba(6,106,254,0.30)'
-                    }}
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-
-                  {/* Beat card */}
-                  <div className="rounded-[20px] bg-dark-surface/80 p-6 ring-1 ring-dark-border sm:p-7">
-                    <h3 className="font-display text-[30px] leading-[1.14] sm:text-[34px]">
-                      {beat.title}
-                    </h3>
-                    <p className="mt-3 max-w-2xl text-base leading-[1.7] text-dark-inkMuted">
-                      {beat.scene}
-                    </p>
-
-                    {/* Persona intro(s) on first entry */}
-                    {beat.entersHere && beat.entersHere.length > 0 && (
-                      <div className="mt-5 flex flex-col gap-3">
-                        {beat.entersHere.map((slug) => (
-                          <PersonaIntro key={slug} slug={slug} />
-                        ))}
-                      </div>
-                    )}
-
-                    {/* On-screen note */}
-                    <div className="mt-5 flex items-start gap-2.5 border-t border-dark-border pt-4">
-                      <span className="eyebrow mt-0.5 flex-none text-phos-400">
-                        On screen
-                      </span>
-                      <span className="text-sm leading-relaxed text-dark-ink/80">
-                        {beat.onScreen}
-                      </span>
-                    </div>
+                  <div className="eyebrow text-phos-400">Chapter {c.numeral}</div>
+                  <div className="mt-2 font-display text-xl leading-tight text-dark-ink">
+                    {c.title}
                   </div>
-                </div>
+                  <p className="mt-2 text-sm leading-relaxed text-dark-inkMuted">
+                    {c.summary}
+                  </p>
+                </Link>
               </li>
-            );
-          })}
-        </ol>
-
-        {/* Coda */}
-        <div className="relative pl-14 sm:pl-16">
-          <p className="max-w-2xl font-display text-xl italic leading-[1.5] text-dark-inkMuted">
-            <span className="phrase">{coda}</span>
-          </p>
+            ))}
+          </ol>
+          <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-xl text-sm text-dark-inkMuted">
+              Start at the beginning and walk it forward, or jump straight to any
+              chapter.
+            </p>
+            <Link
+              href="/story/1"
+              className="flex-none rounded-full bg-phos-500 px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-phos-500/30 transition-transform hover:scale-[1.03]"
+            >
+              Begin the story →
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Architecture pointer */}
-      <section className="mx-auto max-w-5xl px-8 pb-24 pt-4">
+      <section className="mx-auto max-w-5xl px-8 pb-24 pt-2">
         <div className="relative overflow-hidden rounded-3xl bg-sf-cobaltDeep p-8 md:p-10">
           <div className="relative z-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div>

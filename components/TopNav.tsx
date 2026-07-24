@@ -1,14 +1,26 @@
-// Slim top nav shared across home, persona and architecture pages. Echoes
-// the Driva v2 tab strip: small pills on a dark bar, current page
-// highlighted.
+// Slim top nav shared across the landing, chapter, full-story and architecture
+// pages. Small pills on a dark bar, current page highlighted. The three chapter
+// tabs are always jumpable, so the room can move around, though the story is
+// still one linear walk driven by the forward buttons.
 
 import Link from 'next/link';
 import { BrandLockup } from './BrandLockup';
+import { chapters } from '@/lib/story';
 
-type NavKey = 'story' | 'architecture';
+export type NavKey =
+  | 'chapter-1'
+  | 'chapter-2'
+  | 'chapter-3'
+  | 'full-story'
+  | 'architecture';
 
 const TABS: { key: NavKey; label: string; href: string }[] = [
-  { key: 'story', label: 'The story', href: '/' },
+  ...chapters.map((c, i) => ({
+    key: `chapter-${i + 1}` as NavKey,
+    label: `Ch. ${c.numeral}`,
+    href: `/story/${i + 1}`
+  })),
+  { key: 'full-story', label: 'Full story', href: '/story' },
   { key: 'architecture', label: 'Architecture', href: '/architecture' }
 ];
 

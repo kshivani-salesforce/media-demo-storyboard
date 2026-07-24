@@ -40,11 +40,40 @@ export type StoryBeat = {
   focus?: PersonaSlug[];
 };
 
-// Chapter headings, in spine order. Rendered before the first beat of each.
-export const chapters: { key: ChapterKey; numeral: string; title: string }[] = [
-  { key: 'conversation', numeral: 'I', title: 'The conversation' },
-  { key: 'stand-up', numeral: 'II', title: 'The deal stands itself up' },
-  { key: 'booked', numeral: 'III', title: 'Booked and watched' }
+export type Chapter = {
+  key: ChapterKey;
+  // Roman numeral for the chapter chip.
+  numeral: string;
+  // Chapter title.
+  title: string;
+  // One-line summary, used on the landing intro and the full-story recap.
+  summary: string;
+};
+
+// Chapter headings, in spine order. The story is paginated one chapter to a
+// page (/story/1, /story/2, /story/3); the number is the 1-based position.
+export const chapters: Chapter[] = [
+  {
+    key: 'conversation',
+    numeral: 'I',
+    title: 'The conversation',
+    summary:
+      'A face-to-face review goes well, and a good conversation earns Mark the next brief. The whole call is captured and turned into intelligence, no note-taking, no re-keying.'
+  },
+  {
+    key: 'stand-up',
+    numeral: 'II',
+    title: 'The deal stands itself up',
+    summary:
+      'The brief becomes an RFP and an agent stands the deal up on its own: the Opportunity, the records, the account brief. It lands in a book of business already running on agents, assembled before Mark opens his laptop.'
+  },
+  {
+    key: 'booked',
+    numeral: 'III',
+    title: 'Booked and watched',
+    summary:
+      'The schedule optimises itself against the objective, the plan books a few days later, and from the moment it is live the watch is already on, naming any drift before anyone has to ask.'
+  }
 ];
 
 export const story: StoryBeat[] = [
@@ -119,6 +148,32 @@ export const story: StoryBeat[] = [
 export const coda =
   'The next conversation is already better briefed. That is the loop, and it never has to be drawn.';
 
+// The payoff on the full-story recap: what this whole arc changes for Nine.
+// Business value, not story voice, this is the "why it matters" slide.
+export const whyItMatters = {
+  headline: 'Why it matters to Nine',
+  lead:
+    'One deal, walked end to end, but the point is not the deal. It is that the work happened whether or not anyone was watching. Here is what that changes.',
+  points: [
+    {
+      title: 'Sellers sell, they do not re-key',
+      body: "The brief, the Opportunity, the records, the account homework, all stood up by agents before Mark opens his laptop. His time goes to the customer, not the CRM."
+    },
+    {
+      title: 'The book of business runs itself',
+      body: 'Every deal lands in an operation already working pipeline and campaigns in the background. Scale stops meaning more headcount.'
+    },
+    {
+      title: 'Nothing drifts unnoticed',
+      body: 'The performance monitor names variance overnight and posts it to the team. Nine catches the drag before the advertiser does, every campaign, every night.'
+    },
+    {
+      title: 'The relationship compounds',
+      body: 'Because the last campaign was handled well, the next brief lands sooner and better. Trust, not just throughput, is the thing the loop produces.'
+    }
+  ]
+};
+
 // The beat each persona first walks into, derived from `entersHere` so the
 // cast tiles link straight to that person's entrance and never drift from the
 // spine. Returns the beat and its 1-based number (for the tile label).
@@ -135,3 +190,27 @@ export function personaEntryBeats(): {
   });
   return out;
 }
+
+// The beats belonging to a chapter, each paired with its 1-based GLOBAL beat
+// number (01..07) so numbering stays continuous across chapter pages.
+export function beatsForChapter(key: ChapterKey): {
+  beat: StoryBeat;
+  number: number;
+}[] {
+  const out: { beat: StoryBeat; number: number }[] = [];
+  story.forEach((beat, i) => {
+    if (beat.chapter === key) out.push({ beat, number: i + 1 });
+  });
+  return out;
+}
+
+// Look up a chapter by its 1-based page number (1..3). Returns the chapter and
+// its number, or null if out of range, used by the chapter route guard.
+export function chapterByNumber(
+  n: number
+): { chapter: Chapter; number: number } | null {
+  const chapter = chapters[n - 1];
+  return chapter ? { chapter, number: n } : null;
+}
+
+export const chapterCount = chapters.length;
