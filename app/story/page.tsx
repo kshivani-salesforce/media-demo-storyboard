@@ -7,6 +7,7 @@ import {
 } from '@/lib/story';
 import { TopNav } from '@/components/TopNav';
 import { GradientText } from '@/components/GradientText';
+import { PillarChip } from '@/components/PillarChip';
 
 // Full story: the recap tab. A condensed run through the three chapters (title,
 // summary, the beats we saw) rather than the full detail of the chapter pages,
@@ -39,13 +40,16 @@ export default function FullStoryPage() {
                 key={c.key}
                 className="rounded-[20px] bg-dark-surface/80 p-6 ring-1 ring-dark-border sm:p-7"
               >
-                <div className="flex items-baseline gap-3">
-                  <span className="eyebrow text-phos-400">
-                    Chapter {c.numeral}
-                  </span>
-                  <h2 className="font-display text-2xl font-bold text-dark-ink">
-                    {c.title}
-                  </h2>
+                <div className="flex items-baseline justify-between gap-3">
+                  <div className="flex items-baseline gap-3">
+                    <span className="eyebrow text-phos-400">
+                      Chapter {c.numeral}
+                    </span>
+                    <h2 className="font-display text-2xl font-bold text-dark-ink">
+                      {c.title}
+                    </h2>
+                  </div>
+                  <PillarChip pillar={c.pillar} className="flex-none self-center" />
                 </div>
                 <p className="mt-3 max-w-3xl text-base leading-[1.7] text-dark-inkMuted">
                   {c.summary}
@@ -91,7 +95,8 @@ export default function FullStoryPage() {
                 key={p.title}
                 className="rounded-2xl bg-dark-canvas/50 p-5 ring-1 ring-dark-border"
               >
-                <div className="font-display text-lg leading-tight text-dark-ink">
+                <PillarChip pillar={p.pillar} />
+                <div className="mt-3 font-display text-lg leading-tight text-dark-ink">
                   {p.title}
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-dark-inkMuted">

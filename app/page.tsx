@@ -5,6 +5,7 @@ import { GradientText } from '@/components/GradientText';
 import { Sparkles } from '@/components/Sparkles';
 import { TopNav } from '@/components/TopNav';
 import { PersonaTile } from '@/components/PersonaTile';
+import { PillarChip } from '@/components/PillarChip';
 
 // Landing page: meet the cast, then begin. The three persona tiles introduce
 // the people, a short intro frames the deal, and "Begin the story" opens
@@ -64,8 +65,11 @@ export default function LandingPage() {
                   href={`/story/${i + 1}`}
                   className="group block h-full rounded-2xl bg-dark-canvas/50 p-5 ring-1 ring-dark-border transition-transform duration-300 ease-out-strong hover:-translate-y-1"
                 >
-                  <div className="eyebrow text-phos-400">Chapter {c.numeral}</div>
-                  <div className="mt-2 font-display text-xl leading-tight text-dark-ink">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="eyebrow text-phos-400">Chapter {c.numeral}</span>
+                    <PillarChip pillar={c.pillar} />
+                  </div>
+                  <div className="mt-3 font-display text-xl leading-tight text-dark-ink">
                     {c.title}
                   </div>
                   <p className="mt-2 text-sm leading-relaxed text-dark-inkMuted">

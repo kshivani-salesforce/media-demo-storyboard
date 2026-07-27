@@ -11,6 +11,7 @@ import { TopNav, type NavKey } from '@/components/TopNav';
 import { GradientText } from '@/components/GradientText';
 import { Spine } from '@/components/Spine';
 import { BeatCard } from '@/components/BeatCard';
+import { PillarChip } from '@/components/PillarChip';
 
 // One chapter to a page: /story/1, /story/2, /story/3. Renders the chapter's
 // beats on the spine (global numbering preserved) with a forward button that
@@ -47,27 +48,30 @@ export default function ChapterPage({
 
       {/* Chapter header + stepper */}
       <section className="relative mx-auto max-w-5xl px-8 pt-8 pb-8">
-        <div className="flex items-center gap-2">
-          {chapters.map((c, i) => {
-            const isCurrent = i + 1 === number;
-            return (
-              <Link
-                key={c.key}
-                href={`/story/${i + 1}`}
-                aria-current={isCurrent ? 'step' : undefined}
-                className={`flex h-8 w-8 items-center justify-center rounded-full font-display text-sm font-semibold transition ${
-                  isCurrent
-                    ? 'bg-phos-500 text-white shadow-lg shadow-phos-500/30'
-                    : 'bg-dark-surface text-dark-inkMuted ring-1 ring-dark-border hover:text-dark-ink'
-                }`}
-              >
-                {c.numeral}
-              </Link>
-            );
-          })}
-          <span className="ml-2 eyebrow text-dark-inkMuted">
-            Chapter {chapter.numeral} of {chapterCount}
-          </span>
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            {chapters.map((c, i) => {
+              const isCurrent = i + 1 === number;
+              return (
+                <Link
+                  key={c.key}
+                  href={`/story/${i + 1}`}
+                  aria-current={isCurrent ? 'step' : undefined}
+                  className={`flex h-8 w-8 items-center justify-center rounded-full font-display text-sm font-semibold transition ${
+                    isCurrent
+                      ? 'bg-phos-500 text-white shadow-lg shadow-phos-500/30'
+                      : 'bg-dark-surface text-dark-inkMuted ring-1 ring-dark-border hover:text-dark-ink'
+                  }`}
+                >
+                  {c.numeral}
+                </Link>
+              );
+            })}
+            <span className="ml-2 eyebrow text-dark-inkMuted">
+              Chapter {chapter.numeral} of {chapterCount}
+            </span>
+          </div>
+          <PillarChip pillar={chapter.pillar} />
         </div>
 
         <h1 className="mt-6 font-display text-5xl font-bold leading-[1.1] md:text-6xl">
@@ -75,6 +79,12 @@ export default function ChapterPage({
         </h1>
         <p className="mt-4 max-w-2xl text-lg leading-[1.7] text-dark-inkMuted">
           {chapter.summary}
+        </p>
+        <p className="mt-4 flex items-start gap-2.5 border-l-2 border-phos-400/40 pl-4 text-base leading-[1.6] text-dark-ink/85">
+          <span className="max-w-2xl">
+            <span className="eyebrow text-phos-400">{chapter.pillar}</span>{' '}
+            <span className="text-dark-inkMuted">— {chapter.pillarThesis}</span>
+          </span>
         </p>
       </section>
 

@@ -40,12 +40,20 @@ export type StoryBeat = {
   focus?: PersonaSlug[];
 };
 
+// The three pillars each chapter grounds on. One per chapter: the theme the
+// room should take away from that act, in the language Nine's leadership uses.
+export type Pillar = 'Efficiency' | 'Growth' | 'Trust & Value';
+
 export type Chapter = {
   key: ChapterKey;
   // Roman numeral for the chapter chip.
   numeral: string;
   // Chapter title.
   title: string;
+  // The pillar this chapter grounds on.
+  pillar: Pillar;
+  // One line tying the chapter's beats to its pillar. Presenter's "so what".
+  pillarThesis: string;
   // One-line summary, used on the landing intro and the full-story recap.
   summary: string;
 };
@@ -57,6 +65,9 @@ export const chapters: Chapter[] = [
     key: 'conversation',
     numeral: 'I',
     title: 'The conversation',
+    pillar: 'Efficiency',
+    pillarThesis:
+      'The busywork disappears. The meeting captures itself, nothing is re-keyed, and the time goes to the customer.',
     summary:
       'A face-to-face review goes well, and a good conversation earns Mark the next brief. The whole call is captured and turned into intelligence, no note-taking, no re-keying.'
   },
@@ -64,6 +75,9 @@ export const chapters: Chapter[] = [
     key: 'stand-up',
     numeral: 'II',
     title: 'The deal stands itself up',
+    pillar: 'Growth',
+    pillarThesis:
+      'Every deal lands fully assembled in an operation already working pipeline in the background, so the book of business grows without adding headcount.',
     summary:
       'The brief becomes an RFP and an agent stands the deal up on its own: the Opportunity, the records, the account brief. It lands in a book of business already running on agents, assembled before Mark opens his laptop.'
   },
@@ -71,6 +85,9 @@ export const chapters: Chapter[] = [
     key: 'booked',
     numeral: 'III',
     title: 'Booked and watched',
+    pillar: 'Trust & Value',
+    pillarThesis:
+      'The plan books, the watch names any drift before anyone asks, and the relationship compounds into the next brief. Trust, not just throughput.',
     summary:
       'The schedule optimises itself against the objective, the plan books a few days later, and from the moment it is live the watch is already on, naming any drift before anyone has to ask.'
   }
@@ -156,18 +173,22 @@ export const whyItMatters = {
     'One deal, walked end to end, but the point is not the deal. It is that the work happened whether or not anyone was watching. Here is what that changes.',
   points: [
     {
+      pillar: 'Efficiency' as Pillar,
       title: 'Sellers sell, they do not re-key',
       body: "The brief, the Opportunity, the records, the account homework, all stood up by agents before Mark opens his laptop. His time goes to the customer, not the CRM."
     },
     {
+      pillar: 'Growth' as Pillar,
       title: 'The book of business runs itself',
-      body: 'Every deal lands in an operation already working pipeline and campaigns in the background. Scale stops meaning more headcount.'
+      body: 'Every deal lands in an operation already working pipeline and campaigns in the background. The book grows without more headcount.'
     },
     {
+      pillar: 'Trust & Value' as Pillar,
       title: 'Nothing drifts unnoticed',
       body: 'The performance monitor names variance overnight and posts it to the team. Nine catches the drag before the advertiser does, every campaign, every night.'
     },
     {
+      pillar: 'Trust & Value' as Pillar,
       title: 'The relationship compounds',
       body: 'Because the last campaign was handled well, the next brief lands sooner and better. Trust, not just throughput, is the thing the loop produces.'
     }
