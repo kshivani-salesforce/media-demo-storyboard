@@ -53,7 +53,7 @@ export default function ArchitecturePage() {
   };
 
   return (
-    <main className="relative min-h-screen bg-sf-dark-wash text-dark-ink">
+    <main className="relative min-h-screen bg-app-wash text-dark-ink">
       <TopNav active="architecture" />
 
       {/* Hero */}
@@ -137,10 +137,12 @@ export default function ArchitecturePage() {
                   </div>
                 </div>
 
-                {/* Band card */}
-                <div className="relative overflow-hidden rounded-2xl bg-white p-5 text-dark-canvas ring-1 ring-white/10">
+                {/* Band card. Stays light in BOTH themes (mirrors the
+                    Salesforce slide), so its text uses the fixed light-ink
+                    navy, not the themed dark-* tokens which would flip. */}
+                <div className="relative overflow-hidden rounded-2xl bg-white p-5 text-light-ink ring-1 ring-black/5">
                   <div className="flex items-baseline gap-3">
-                    <h2 className="font-display text-2xl font-bold text-dark-canvas">
+                    <h2 className="font-display text-2xl font-bold text-light-ink">
                       {band.title}
                     </h2>
                     {band.subline && (
@@ -156,7 +158,7 @@ export default function ArchitecturePage() {
                       return (
                         <div
                           key={c.label}
-                          className={`flex items-start gap-2 rounded-xl bg-slate-50 px-3 py-2 text-dark-canvas ring-1 ring-slate-200 transition-opacity duration-300 ${
+                          className={`flex items-start gap-2 rounded-xl bg-slate-50 px-3 py-2 text-light-ink ring-1 ring-slate-200 transition-opacity duration-300 ${
                             lit ? 'opacity-100' : 'opacity-30'
                           }`}
                         >

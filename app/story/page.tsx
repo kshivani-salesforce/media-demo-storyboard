@@ -16,7 +16,7 @@ import { PillarChip } from '@/components/PillarChip';
 
 export default function FullStoryPage() {
   return (
-    <main className="relative min-h-screen bg-sf-dark-wash text-dark-ink">
+    <main className="relative min-h-screen bg-app-wash text-dark-ink">
       <TopNav active="full-story" />
 
       {/* Hero */}

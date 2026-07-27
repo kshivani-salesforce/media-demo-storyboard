@@ -43,7 +43,7 @@ export default function ChapterPage({
     : `Chapter ${chapters[number].numeral} · ${chapters[number].title} →`;
 
   return (
-    <main className="relative min-h-screen bg-sf-dark-wash text-dark-ink">
+    <main className="relative min-h-screen bg-app-wash text-dark-ink">
       <TopNav active={`chapter-${number}` as NavKey} />
 
       {/* Chapter header + stepper */}

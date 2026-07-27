@@ -7,6 +7,11 @@ export const metadata: Metadata = {
     'Storyboard surface for the Salesforce + Nine Ad Sales narrative: personas and the campaign lifecycle, in an agentic enterprise.'
 };
 
+// Applies the persisted theme before first paint to avoid a flash. Defaults to
+// dark (the storyboard's established look); only an explicit 'light' choice in
+// localStorage opens light. Kept in sync with components/ThemeToggle.tsx.
+const themeInit = `(function(){try{var t=localStorage.getItem('nine-theme');var d=t!=='light';var r=document.documentElement;r.classList.toggle('dark',d);r.style.colorScheme=d?'dark':'light';}catch(e){document.documentElement.classList.add('dark');}})();`;
+
 export default function RootLayout({
   children
 }: {
@@ -17,8 +22,9 @@ export default function RootLayout({
   // the mono "receipts". Inter is wider and more open than DM Sans, so the
   // copy no longer reads squished.
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

@@ -2,6 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme tokens. The `dark.*` Tailwind colours resolve to these channel vars
+   (space-separated RGB, so opacity modifiers like bg-dark-surface/70 work).
+   :root is the DMS light theme; .dark is Salesforce Night. A single `.dark`
+   class on <html> flips everything. Default is dark (set by the layout script
+   before first paint), so an SSR page with no class still reads as light here
+   but the script adds .dark before paint. */
+:root {
+  /* DMS light: cool blue-tinted paper, white cards, navy ink. */
+  --c-canvas: 238 244 255;      /* #eef4ff */
+  --c-surface: 255 255 255;     /* #ffffff card */
+  --c-surface-lift: 226 236 255;/* #e2ecff */
+  --c-border: 205 220 242;      /* #cddcf2 hairline on paper */
+  --c-ink: 0 30 91;             /* #001e5b navy text */
+  --c-ink-muted: 91 101 146;    /* #5b6592 muted */
+
+  /* Page wash + emphasis gradient, per theme. */
+  --wash:
+    radial-gradient(ellipse 1100px 700px at 50% 0%, rgba(6,106,254,0.06) 0%, rgba(61,139,254,0.03) 35%, rgba(238,244,255,0) 70%),
+    linear-gradient(180deg, #f4f8ff 0%, #eef4ff 50%, #f4f8ff 100%);
+  --phrase-from: #066afe;
+  --phrase-to: #022ac0;
+
+  color-scheme: light;
+}
+
+.dark {
+  /* Salesforce Night: Electric-Blue navies, white ink, cloud-blue muted. */
+  --c-canvas: 0 22 66;          /* #001642 */
+  --c-surface: 0 30 91;         /* #001e5b */
+  --c-surface-lift: 0 39 117;   /* #002775 */
+  --c-border: 28 58 122;        /* #1c3a7a */
+  --c-ink: 255 255 255;         /* #ffffff */
+  --c-ink-muted: 168 203 255;   /* #a8cbff */
+
+  --wash:
+    radial-gradient(ellipse 1100px 700px at 50% 55%, rgba(6,106,254,0.16) 0%, rgba(61,139,254,0.06) 35%, rgba(0,15,50,0) 70%),
+    radial-gradient(ellipse 700px 500px at 90% 0%, rgba(168,203,255,0.08) 0%, rgba(0,15,50,0) 60%),
+    linear-gradient(180deg, #000f32 0%, #001642 50%, #000f32 100%);
+  --phrase-from: #3d8bfe;
+  --phrase-to: #066afe;
+
+  color-scheme: dark;
+}
+
+/* The themed page wash. Replaces the fixed bg-sf-dark-wash on each page's
+   <main> so the ground flips with the theme. */
+.bg-app-wash {
+  background: var(--wash);
+}
+
 html,
 body {
   height: 100%;
@@ -51,9 +101,9 @@ body {
 }
 
 /* Reusable phrase: Electric-Blue-washed emphasis text (Inter). Components add
-   `italic` explicitly where wanted. */
+   `italic` explicitly where wanted. Gradient stops swap per theme. */
 .phrase {
-  background: linear-gradient(180deg, #3d8bfe 0%, #066afe 100%);
+  background: linear-gradient(180deg, var(--phrase-from) 0%, var(--phrase-to) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

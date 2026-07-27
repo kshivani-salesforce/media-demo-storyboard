@@ -1,12 +1,17 @@
 import type { Config } from 'tailwindcss';
 
-// Salesforce DMS palette (Night mode), lifted from the hosted design tokens:
-// Electric Blue #066AFE on Electric-Blue navies (#001642 ground, #001E5B
-// surface). Token NAMES are unchanged from the prior editorial system so no
-// component needs to change, only the values move to Salesforce blue. There
-// is no customer-purple nod here: Nine is a wordmark co-brand, so the whole
-// system stays on Salesforce Electric Blue.
+// Salesforce DMS palette, with light + dark modes. The `dark.*` token group is
+// the app's semantic surface/ink set; despite the name it now resolves to CSS
+// variables (defined in globals.css under :root for light and .dark for dark),
+// so a single `.dark` class on <html> flips the whole app and no component
+// className has to change. Values use the rgb(var / <alpha-value>) channel
+// technique so opacity modifiers (e.g. bg-dark-surface/70) still work.
+//
+// Electric Blue #066AFE is the fixed accent in both modes; the `light.*` group
+// stays fixed (used by the always-light sticker bubble + architecture cards).
+// Nine is a wordmark co-brand, so the system stays on Salesforce Electric Blue.
 const config: Config = {
+  darkMode: 'class',
   content: [
     './app/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -15,8 +20,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Light mode (kept for the architecture surface). Cool blue-tinted
-        // paper so the white band cards still sit on a Salesforce ground.
+        // Fixed light values (NOT themed). Used by the always-light sticker
+        // bubble ring and the architecture white band cards, which stay light
+        // in both modes to mirror the Salesforce slide.
         light: {
           canvas: '#eef4ff',
           card: '#ffffff',
@@ -24,16 +30,15 @@ const config: Config = {
           ink: '#001e5b',
           inkMuted: '#5b6592'
         },
-        // Dark mode = Salesforce Night. Layers from canvas (background-1) to
-        // surface (surface-1) to a lifted step, all Electric-Blue navies.
-        // Ink is white (Night headline/body); muted is a cloud-blue grey.
+        // Themed semantic surface/ink set. Each resolves to a CSS channel var
+        // that swaps between light (:root) and dark (.dark) in globals.css.
         dark: {
-          canvas: '#001642',   // --color-electric-blue-10 (background-1)
-          surface: '#001e5b',  // --color-electric-blue-15 (surface-1)
-          surfaceLift: '#002775', // --color-electric-blue-20
-          border: '#1c3a7a',   // cloud-blue-tinted hairline on navy
-          ink: '#ffffff',
-          inkMuted: '#a8cbff'  // cloud-blue muted ink
+          canvas: 'rgb(var(--c-canvas) / <alpha-value>)',
+          surface: 'rgb(var(--c-surface) / <alpha-value>)',
+          surfaceLift: 'rgb(var(--c-surface-lift) / <alpha-value>)',
+          border: 'rgb(var(--c-border) / <alpha-value>)',
+          ink: 'rgb(var(--c-ink) / <alpha-value>)',
+          inkMuted: 'rgb(var(--c-ink-muted) / <alpha-value>)'
         },
         // Electric Blue: the dominant accent. 500 is the on-brand core
         // (#066AFE); 400 a lighter step for glows; 200/50 cloud-blue tints for
