@@ -54,10 +54,15 @@ export default function LandingPage() {
       {/* The chapters + begin */}
       <section className="relative mx-auto max-w-5xl px-8 pb-14">
         <div className="rounded-3xl bg-dark-surface/80 p-8 ring-1 ring-dark-border md:p-10">
-          <div className="mb-6 flex items-center gap-3">
-            <span className="eyebrow text-phos-400">Three chapters</span>
+          <div className="mb-2 flex items-center gap-3">
+            <span className="eyebrow text-phos-400">Three chapters · Nine&apos;s e3</span>
             <span className="h-px flex-1 bg-dark-border" />
           </div>
+          <p className="mb-6 max-w-2xl text-sm leading-relaxed text-dark-inkMuted">
+            One chapter to each of Nine&apos;s three E&apos;s. Efficiency and
+            Effectiveness compound into Enjoyment: work that runs itself is work
+            people, and the customer, actually enjoy.
+          </p>
           <ol className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {chapters.map((c, i) => (
               <li key={c.key}>

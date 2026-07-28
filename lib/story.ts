@@ -40,9 +40,11 @@ export type StoryBeat = {
   focus?: PersonaSlug[];
 };
 
-// The three pillars each chapter grounds on. One per chapter: the theme the
-// room should take away from that act, in the language Nine's leadership uses.
-export type Pillar = 'Efficiency' | 'Growth' | 'Trust & Value';
+// The three pillars each chapter grounds on: Nine's "e3" strategic theme,
+// Efficiency, Effectiveness, Enjoyment. One E per chapter, and the arc is that
+// the first two compound into the third: work that is efficient and effective
+// is work people (and the customer relationship) actually enjoy.
+export type Pillar = 'Efficiency' | 'Effectiveness' | 'Enjoyment';
 
 export type Chapter = {
   key: ChapterKey;
@@ -75,9 +77,9 @@ export const chapters: Chapter[] = [
     key: 'stand-up',
     numeral: 'II',
     title: 'The deal stands itself up',
-    pillar: 'Growth',
+    pillar: 'Effectiveness',
     pillarThesis:
-      'Every deal lands fully assembled in an operation already working pipeline in the background, so the book of business grows without adding headcount.',
+      'The deal is stood up right, fully assembled with the account context and history already on it, so the seller works from the complete picture, not a blank record.',
     summary:
       'The brief becomes an RFP and an agent stands the deal up on its own: the Opportunity, the records, the account brief. It lands in a book of business already running on agents, assembled before Mark opens his laptop.'
   },
@@ -85,9 +87,9 @@ export const chapters: Chapter[] = [
     key: 'booked',
     numeral: 'III',
     title: 'Booked and watched',
-    pillar: 'Trust & Value',
+    pillar: 'Enjoyment',
     pillarThesis:
-      'The plan books, the watch names any drift before anyone asks, and the relationship compounds into the next brief. Trust, not just throughput.',
+      'Efficient and effective compound into this: the plan books, the watch names any drift before anyone asks, and the seller walks into the next conversation confident, not firefighting. Work people, and the customer, actually enjoy.',
     summary:
       'The schedule optimises itself against the objective, the plan books a few days later, and from the moment it is live the watch is already on, naming any drift before anyone has to ask.'
   }
@@ -170,7 +172,7 @@ export const coda =
 export const whyItMatters = {
   headline: 'Why it matters to Nine',
   lead:
-    'One deal, walked end to end, but the point is not the deal. It is that the work happened whether or not anyone was watching. Here is what that changes.',
+    'One deal, walked end to end, but the point is not the deal. It is that the work happened whether or not anyone was watching, against all three of Nine’s E’s: efficient, effective, and something people actually enjoy.',
   points: [
     {
       pillar: 'Efficiency' as Pillar,
@@ -178,17 +180,17 @@ export const whyItMatters = {
       body: "The brief, the Opportunity, the records, the account homework, all stood up by agents before Mark opens his laptop. His time goes to the customer, not the CRM."
     },
     {
-      pillar: 'Growth' as Pillar,
-      title: 'The book of business runs itself',
-      body: 'Every deal lands in an operation already working pipeline and campaigns in the background. The book grows without more headcount.'
+      pillar: 'Effectiveness' as Pillar,
+      title: 'Every deal stood up right',
+      body: 'The Opportunity, the records and the account context assemble themselves, so the seller works from the complete, correct picture in an operation already running pipeline in the background.'
     },
     {
-      pillar: 'Trust & Value' as Pillar,
-      title: 'Nothing drifts unnoticed',
-      body: 'The performance monitor names variance overnight and posts it to the team. Nine catches the drag before the advertiser does, every campaign, every night.'
+      pillar: 'Enjoyment' as Pillar,
+      title: 'Nobody gets blindsided',
+      body: 'The performance monitor names variance overnight and posts it to the team. Cindy walks into the review briefed, not firefighting, and Nine catches the drag before the advertiser does.'
     },
     {
-      pillar: 'Trust & Value' as Pillar,
+      pillar: 'Enjoyment' as Pillar,
       title: 'The relationship compounds',
       body: 'Because the last campaign was handled well, the next brief lands sooner and better. Trust, not just throughput, is the thing the loop produces.'
     }
