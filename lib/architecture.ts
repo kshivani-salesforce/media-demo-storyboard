@@ -50,6 +50,12 @@ export type ArchBand = {
   title: string;
   // Sub-line under the title.
   subline?: string;
+  // Optional "bring your own surface" strip, rendered under the band header.
+  // Used on the engagement band to make the Headless 360 point: the system of
+  // engagement is pluggable, the same agents and work can be reached from
+  // Slack, the Salesforce app, Gemini, Claude, a voice line, wherever the
+  // person already is. Logo is optional; without one the name shows as a chip.
+  surfaces?: { name: string; logo?: string }[];
   // Tone used by the lit-state (the band's brand colour).
   tone: string;
   components: ArchComponent[];
@@ -60,16 +66,23 @@ export const bands: ArchBand[] = [
     key: 'engagement',
     index: 1,
     rail: 'System of engagement',
-    capability: 'Any workspace',
-    title: 'Slack',
-    subline: 'Slackbot · Canvas · Enterprise Search · Messaging & Huddles · Tableau Viz · Data Q&A',
+    capability: 'Any workspace · headless',
+    title: 'Any surface',
+    subline: 'The system of engagement is pluggable. The same agents and the same work are reached wherever the person already is, Slack, the Salesforce app, a Gemini or Claude assistant, or a voice line. Slack is shown here.',
+    surfaces: [
+      { name: 'Slack', logo: '/icons/slack-3d.png' },
+      { name: 'Salesforce', logo: '/icons/salesforce.svg' },
+      { name: 'Gemini' },
+      { name: 'Claude' },
+      { name: 'Voice' }
+    ],
     tone: '#4a154b',
     components: [
-      { label: 'In-Person Meeting Capture', icon: '/icons/slack-3d.png', caption: 'The face-to-face meeting, captured on mobile', beats: ['conversation'] },
+      { label: 'In-Person Meeting Capture', icon: '/icons/salesforce.svg', caption: 'A Salesforce capability: the face-to-face meeting, captured on mobile', beats: ['conversation'] },
       { label: 'Slackbot', icon: '/icons/slack-3d.png', caption: 'The team channel where agents post and hand off', beats: ['command-center', 'monitor'] },
-      { label: 'Canvas', beats: ['monitor'] },
-      { label: 'Enterprise Search', beats: ['deal-focus'] },
-      { label: 'Messaging & Huddles' },
+      { label: 'Canvas', icon: '/icons/slack-3d.png', beats: ['monitor'] },
+      { label: 'Enterprise Search', icon: '/icons/slack-3d.png', beats: ['deal-focus'] },
+      { label: 'Messaging & Huddles', icon: '/icons/slack-3d.png' },
       { label: 'Tableau Viz · Data Q&A', beats: ['command-center'] }
     ]
   },
@@ -90,8 +103,8 @@ export const bands: ArchBand[] = [
       },
       {
         label: 'RFP Agent',
-        icon: '/icons/agentforce.png',
-        caption: 'Reads the RFP document and stands up the Opportunity + structured records',
+        icon: '/icons/media.svg',
+        caption: 'An Agentforce Media agent: reads the RFP document and stands up the Opportunity + structured records',
         beats: ['rfp']
       },
       {
@@ -127,11 +140,11 @@ export const bands: ArchBand[] = [
       { label: 'Ad Sales Command Center', icon: '/icons/media.svg', caption: 'The book of business view; agents already at work', beats: ['command-center'] },
       { label: 'Account Brief & Customer Intelligence', caption: 'The homework, assembled on the Opportunity', beats: ['deal-focus'] },
       { label: 'Ad Sales Mgmt', icon: '/icons/media.svg', caption: 'The proposal · the media plan · the calendar', beats: ['proposal', 'booked'] },
-      { label: 'Quote / Media Plan', caption: 'The proposal becomes a bookable plan', beats: ['booked'] },
-      { label: 'Subscriber Lifecycle', caption: 'Loyalty + retention motion' },
+      { label: 'Quote / Media Plan', icon: '/icons/media.svg', caption: 'The proposal becomes a bookable plan', beats: ['booked'] },
+      { label: 'Subscriber Lifecycle', icon: '/icons/media.svg', caption: 'Loyalty + retention motion' },
       { label: 'Predictive Modelling', caption: 'Demand forecast inputs' },
-      { label: 'Workflow Orchestration', caption: 'The shared spine', beats: ['command-center', 'monitor'] },
-      { label: 'Partner & Customer Communities' },
+      { label: 'Workflow Orchestration', icon: '/icons/media.svg', caption: 'The shared spine', beats: ['command-center', 'monitor'] },
+      { label: 'Partner & Customer Communities', icon: '/icons/media.svg' },
       { label: 'Sales · Service · Marketing · Commerce · Revenue · Platform' }
     ]
   },

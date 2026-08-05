@@ -152,6 +152,33 @@ export default function ArchitecturePage() {
                     )}
                   </div>
 
+                  {/* Headless 360 strip: the engagement surface is pluggable.
+                      Same agents, same work, reached from wherever the person
+                      already is. Logos where we have them, wordmark chips
+                      otherwise (same pattern as the model-providers row). */}
+                  {band.surfaces && (
+                    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-lg bg-slate-50 px-3 py-2 ring-1 ring-slate-200">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                        Bring your own surface
+                      </span>
+                      {band.surfaces.map((s) => (
+                        <span key={s.name} className="flex items-center gap-1.5">
+                          {s.logo ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={s.logo}
+                              alt={s.name}
+                              className="h-4 w-auto object-contain"
+                            />
+                          ) : null}
+                          <span className="text-xs font-semibold text-light-ink">
+                            {s.name}
+                          </span>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
                   <div className="mt-4 grid grid-cols-1 items-stretch gap-2 sm:grid-cols-2 lg:grid-cols-3">
                     {band.components.map((c) => {
                       const lit = isLit(band, c.label);
