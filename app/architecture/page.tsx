@@ -141,24 +141,24 @@ export default function ArchitecturePage() {
                     Salesforce slide), so its text uses the fixed light-ink
                     navy, not the themed dark-* tokens which would flip. */}
                 <div className="relative overflow-hidden rounded-2xl bg-white p-5 text-light-ink ring-1 ring-black/5">
-                  <div className="flex items-baseline gap-3">
+                  <div className="flex flex-col gap-1">
                     <h2 className="font-display text-2xl font-bold text-light-ink">
                       {band.title}
                     </h2>
                     {band.subline && (
-                      <span className="text-xs text-slate-500">
+                      <span className="max-w-3xl text-xs leading-snug text-slate-500">
                         {band.subline}
                       </span>
                     )}
                   </div>
 
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="mt-4 grid grid-cols-1 items-stretch gap-2 sm:grid-cols-2 lg:grid-cols-3">
                     {band.components.map((c) => {
                       const lit = isLit(band, c.label);
                       return (
                         <div
                           key={c.label}
-                          className={`flex items-start gap-2 rounded-xl bg-slate-50 px-3 py-2 text-light-ink ring-1 ring-slate-200 transition-opacity duration-300 ${
+                          className={`flex h-full items-start gap-2 rounded-xl bg-slate-50 px-3 py-2 text-light-ink ring-1 ring-slate-200 transition-opacity duration-300 ${
                             lit ? 'opacity-100' : 'opacity-30'
                           }`}
                         >

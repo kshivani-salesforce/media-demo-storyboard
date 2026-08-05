@@ -1,0 +1,26 @@
+[       8ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/z7NKdQbpaz0aOeMuNV4msbyQKZD8jtjnI76DG8juSp0.woff2:0
+[       9ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/pxiEyp8kv8JHgFVrFJXUdVNF.woff2:0
+[       9ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/pxiGyp8kv8JHgFVrJJLecnFHGPc.woff2:0
+[       9ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/pxiByp8kv8JHgFVrLCz7V15vEv-L.woff2:0
+[       9ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/pxiDyp8kv8JHgFVrJJLmy15lFd2JQEk.woff2:0
+[       9ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/FwZc7-Am2FI_-VOxaLDvvq2LoGm8_K8.woff2:0
+[       9ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/FwZC7-Am2FI_-VOxaLDvvq27p2O73q3LkQ.woff2:0
+[       9ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/FwZD7-Am2FI_-VOxaLDvvq2zGUae8YXBmWI.woff2:0
+[       9ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/FwZB7-Am2FI_-VOxaLDvvq27p1sC8Y_Gu2CkOw.woff2:0
+[     103ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
+[     135ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/z7NKdQbpaz0aOeMuNV4msbyQKZD8jtjnI76DG8juSp0.woff2:0
+[     135ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/pxiEyp8kv8JHgFVrFJXUdVNF.woff2:0
+[     135ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/pxiGyp8kv8JHgFVrJJLecnFHGPc.woff2:0
+[     135ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/pxiByp8kv8JHgFVrLCz7V15vEv-L.woff2:0
+[     135ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/pxiDyp8kv8JHgFVrJJLmy15lFd2JQEk.woff2:0
+[     135ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/FwZc7-Am2FI_-VOxaLDvvq2LoGm8_K8.woff2:0
+[     135ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/FwZC7-Am2FI_-VOxaLDvvq27p2O73q3LkQ.woff2:0
+[     135ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/FwZD7-Am2FI_-VOxaLDvvq2zGUae8YXBmWI.woff2:0
+[     135ms] [ERROR] Failed to load resource: net::ERR_FILE_NOT_FOUND @ filesystem:https://docs.google.com/persistent/docs/fonts/FwZB7-Am2FI_-VOxaLDvvq27p1sC8Y_Gu2CkOw.woff2:0
+[     685ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://docs.google.com/presentation/d/10G-k9N_N-0XC8d_LfKRfBqiz3vhLAh5Pl7qkoFzTblU/docos/p/sync?sid=3fb421c0eec3bc5a&vc=0&c=0&w=0&flr=0&smv=9&smb=%5B9%2C%20%5D&token=AJagN6RnxjqVdf7zUlrWiNRDWDTp%3A1785285200312&ouid=108251679328620297324&includes_info_params=1:0
+[    1121ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing. @ https://docs.google.com/drivesharing/clientmodel?id=10G-k9N_N-0XC8d_LfKRfBqiz3vhLAh5Pl7qkoFzTblU&foreignService=punch&authuser=0&origin=https%3A%2F%2Fdocs.google.com:0
+[    2798ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
+[    2815ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
+[    2817ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
+[    2818ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
+[ 3953406ms] [ERROR] Failed to load resource: net::ERR_QUIC_PROTOCOL_ERROR.QUIC_TOO_MANY_RTOS @ https://docs.google.com/presentation/d/10G-k9N_N-0XC8d_LfKRfBqiz3vhLAh5Pl7qkoFzTblU/bind?id=10G-k9N_N-0XC8d_LfKRfBqiz3vhLAh5Pl7qkoFzTblU&sid=3fb421c0eec3bc5a&token=AJagN6RnxjqVdf7zUlrWiNRDWDTp%3A1785285200312&ouid=108251679328620297324&includes_info_params=1&usp=drive_link&cros_files=false&nded=false&VER=8&lsq=1785285199567&u=01942621727953746967&flr=0&gsi=0&smv=9&smb=%5B9%2C%20%5D&cimpl=0&RID=rpc&SID=F83E3BF428A76D0A&CI=0&AID=157&TYPE=xmlhttp&zx=jo40lgogbef3&t=1:0
