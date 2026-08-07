@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { SideNav } from '@/components/SideNav';
 
 export const metadata: Metadata = {
   title: 'Ad Sales in an Agentic Enterprise · Salesforce + Nine',
@@ -36,7 +37,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans antialiased min-h-screen">{children}</body>
+      <body className="font-sans antialiased min-h-screen">
+        <SideNav />
+        {children}
+      </body>
     </html>
   );
 }

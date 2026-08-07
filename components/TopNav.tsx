@@ -9,6 +9,7 @@ import { ThemeToggle } from './ThemeToggle';
 import { chapters } from '@/lib/story';
 
 export type NavKey =
+  | 'home'
   | 'chapter-1'
   | 'chapter-2'
   | 'chapter-3'
@@ -16,6 +17,7 @@ export type NavKey =
   | 'architecture';
 
 const TABS: { key: NavKey; label: string; href: string }[] = [
+  { key: 'home', label: 'Home', href: '/' },
   ...chapters.map((c, i) => ({
     key: `chapter-${i + 1}` as NavKey,
     label: `Ch. ${c.numeral}`,

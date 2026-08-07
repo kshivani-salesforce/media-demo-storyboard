@@ -18,7 +18,7 @@ const castOrder = [personas.mark, personas.hannah, personas.cindy];
 export default function LandingPage() {
   return (
     <main className="relative min-h-screen bg-app-wash text-dark-ink">
-      <TopNav />
+      <TopNav active="home" />
 
       {/* Hero */}
       <section className="relative mx-auto max-w-5xl px-8 pt-10 pb-10">
