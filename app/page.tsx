@@ -6,6 +6,7 @@ import { Sparkles } from '@/components/Sparkles';
 import { TopNav } from '@/components/TopNav';
 import { PersonaTile } from '@/components/PersonaTile';
 import { PillarChip } from '@/components/PillarChip';
+import { DemoPlayer } from '@/components/DemoPlayer';
 
 // Landing page: meet the cast, then begin. The three persona tiles introduce
 // the people, a short intro frames the deal, and "Begin the story" opens
@@ -32,6 +33,24 @@ export default function LandingPage() {
             itself, one story, told once. Three chapters. Meet the three people
             you will follow, then walk it beat by beat.
           </p>
+        </div>
+
+        {/* The recorded demo, embedded. A soft electric-blue aura and a small
+            eyebrow lift it off the page and mark it as the thing to press,
+            without a heavy frame that would fight the quiet style. */}
+        <div className="relative z-10 mx-auto mt-10 max-w-3xl animate-fade-in">
+          <div className="mb-3 flex items-center gap-3">
+            <span className="eyebrow text-phos-400">Watch the demo</span>
+            <span className="h-px flex-1 bg-dark-border" />
+            <span className="eyebrow text-dark-inkMuted">end to end</span>
+          </div>
+          <div className="group relative">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -inset-3 -z-10 rounded-[2rem] bg-phos-500/20 opacity-70 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
+            />
+            <DemoPlayer className="ring-2 ring-phos-500/40" />
+          </div>
         </div>
       </section>
 
