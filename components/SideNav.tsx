@@ -39,15 +39,14 @@ function isCurrent(pathname: string, href: string): boolean {
   return pathname === href || pathname.startsWith(href + '/');
 }
 
+// Rendered per-page (not globally in layout) so the wide architecture page can
+// simply omit it; Home stays reachable there via the top-nav Home pill. Kept
+// off the layout because a globally-prerendered client component sees a null
+// pathname at build time, which defeated a route guard.
 export function SideNav() {
   const pathname = usePathname() || '/';
   const items = useNavItems();
   const [open, setOpen] = useState(false);
-
-  // The architecture page is a wide (max-w-7xl) diagram; the rail crowds it.
-  // Home is reachable from the top-nav pill there, so suppress the rail (and
-  // its mobile Menu button) on that route.
-  if (pathname === '/architecture') return null;
 
   const Marker = ({ item, active }: { item: NavItem; active: boolean }) => (
     <span

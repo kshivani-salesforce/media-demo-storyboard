@@ -7,6 +7,7 @@ import { TopNav } from '@/components/TopNav';
 import { PersonaTile } from '@/components/PersonaTile';
 import { PillarChip } from '@/components/PillarChip';
 import { DemoPlayer } from '@/components/DemoPlayer';
+import { SideNav } from '@/components/SideNav';
 
 // Landing page: meet the cast, then begin. The three persona tiles introduce
 // the people, a short intro frames the deal, and "Begin the story" opens
@@ -19,6 +20,7 @@ export default function LandingPage() {
   return (
     <main className="relative min-h-screen bg-app-wash text-dark-ink">
       <TopNav active="home" />
+      <SideNav />
 
       {/* Hero */}
       <section className="relative mx-auto max-w-5xl px-8 pt-10 pb-10">

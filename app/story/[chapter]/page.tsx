@@ -12,6 +12,7 @@ import { GradientText } from '@/components/GradientText';
 import { Spine } from '@/components/Spine';
 import { BeatCard } from '@/components/BeatCard';
 import { PillarChip } from '@/components/PillarChip';
+import { SideNav } from '@/components/SideNav';
 
 // One chapter to a page: /story/1, /story/2, /story/3. Renders the chapter's
 // beats on the spine (global numbering preserved) with a forward button that
@@ -45,6 +46,7 @@ export default function ChapterPage({
   return (
     <main className="relative min-h-screen bg-app-wash text-dark-ink">
       <TopNav active={`chapter-${number}` as NavKey} />
+      <SideNav />
 
       {/* Chapter header + stepper */}
       <section className="relative mx-auto max-w-5xl px-8 pt-8 pb-8">

@@ -8,6 +8,7 @@ import {
 import { TopNav } from '@/components/TopNav';
 import { GradientText } from '@/components/GradientText';
 import { PillarChip } from '@/components/PillarChip';
+import { SideNav } from '@/components/SideNav';
 
 // Full story: the recap tab. A condensed run through the three chapters (title,
 // summary, the beats we saw) rather than the full detail of the chapter pages,
@@ -18,6 +19,7 @@ export default function FullStoryPage() {
   return (
     <main className="relative min-h-screen bg-app-wash text-dark-ink">
       <TopNav active="full-story" />
+      <SideNav />
 
       {/* Hero */}
       <section className="relative mx-auto max-w-5xl px-8 pt-8 pb-8">
