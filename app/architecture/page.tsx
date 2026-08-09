@@ -12,7 +12,6 @@ import {
 import { TopNav } from '@/components/TopNav';
 import { GradientText } from '@/components/GradientText';
 import { BrandLockup } from '@/components/BrandLockup';
-import { SideNav } from '@/components/SideNav';
 
 // /architecture
 //
@@ -51,7 +50,6 @@ export default function ArchitecturePage() {
   return (
     <main className="relative min-h-screen bg-app-wash text-dark-ink">
       <TopNav active="architecture" />
-      <SideNav />
 
       {/* Hero */}
       <section className="relative mx-auto max-w-7xl px-8 pt-8 pb-6">
