@@ -4,57 +4,54 @@ import { useState } from 'react';
 import Link from 'next/link';
 import {
   bands,
+  agenticBands,
   trustLayer,
   modelProviders,
-  componentsLitByBeat,
   type ArchBand
 } from '@/lib/architecture';
-import { story } from '@/lib/story';
 import { TopNav } from '@/components/TopNav';
 import { GradientText } from '@/components/GradientText';
 import { BrandLockup } from '@/components/BrandLockup';
-
-// The switcher lights the architecture by story beat: each beat's id is the
-// tag its participating components carry (lib/architecture.ts `beats`). Short
-// pill labels keyed off the beat id so the strip stays tidy.
-const BEAT_PILLS: Record<string, string> = {
-  conversation: 'Conversation',
-  rfp: 'RFP → deal',
-  'command-center': 'Command Center',
-  'deal-focus': 'Deal in focus',
-  proposal: 'Optimise schedule',
-  booked: 'Booked',
-  monitor: 'Monitor'
-};
-const archThreads = story.map((b) => ({ id: b.id, pill: BEAT_PILLS[b.id] ?? b.title }));
+import { SideNav } from '@/components/SideNav';
 
 // /architecture
 //
-// Direct visual lift of design/architecture-reference.png: the
-// Agentic Media Enterprise Architecture slide.
+// Two views of one estate, on a toggle:
+//   - "Agentic Media": the operating model this demo builds, described as the
+//     work rather than the named products (lib/architecture.ts `agenticBands`).
+//   - "Salesforce": the canonical Agentic Media Enterprise Architecture, the
+//     named Salesforce products (`bands`), a direct lift of the reference slide.
 //
-// Layout:
-//
+// Both render the same layout:
 //   [ left rail: System of … ]   [ band card: title + components ]   [ right rail: Any … ]
-//
-// Five bands top to bottom: engagement / agency / work / context / trust.
-// A pill switcher above the diagram lets you focus a vignette;
-// non-participating components dim to ~25% opacity.
+// Four bands inside the trust boundary, then the trust membrane and the
+// external models outside it. Static diagrams: no beat/thread switcher.
 
-type FocusKey = string; // beat id, or 'all'
+type ViewKey = 'agentic' | 'salesforce';
+
+const VIEWS: { key: ViewKey; label: string; bands: ArchBand[]; blurb: string }[] = [
+  {
+    key: 'agentic',
+    label: 'Agentic Media',
+    bands: agenticBands,
+    blurb: 'The operating model this demo builds: sellers and advertisers, the agents that coordinate the deal, the commercial systems underneath, and the trusted context that grounds it all.'
+  },
+  {
+    key: 'salesforce',
+    label: 'Salesforce',
+    bands: bands,
+    blurb: 'The same estate as the Salesforce Agentic Media Enterprise Architecture: the named products, one workspace, the agents, Customer 360 and Data 360, inside one trust boundary.'
+  }
+];
 
 export default function ArchitecturePage() {
-  const [focus, setFocus] = useState<FocusKey>('all');
-  const litComponentIds = focus === 'all' ? null : componentsLitByBeat(focus);
-
-  const isLit = (band: ArchBand, label: string) => {
-    if (!litComponentIds) return true;
-    return litComponentIds.has(`${band.key}:${label}`);
-  };
+  const [viewKey, setViewKey] = useState<ViewKey>('agentic');
+  const view = VIEWS.find((v) => v.key === viewKey) ?? VIEWS[0];
 
   return (
     <main className="relative min-h-screen bg-app-wash text-dark-ink">
       <TopNav active="architecture" />
+      <SideNav />
 
       {/* Hero */}
       <section className="relative mx-auto max-w-7xl px-8 pt-8 pb-6">
@@ -65,48 +62,45 @@ export default function ArchitecturePage() {
               <GradientText>Architecture.</GradientText>
             </h1>
             <p className="mt-4 max-w-2xl text-base leading-[1.7] text-dark-inkMuted">
-              Five layers under every demo. Pick a story thread and the parts
-              that light up are the parts the demo actually exercises.
+              Two views of one estate: the operating model this demo builds, and
+              the Salesforce platform it sits on.
             </p>
           </div>
           <BrandLockup size="sm" showTitle={false} className="hidden md:flex" />
         </div>
       </section>
 
-      {/* Vignette switcher */}
-      <section className="relative mx-auto max-w-7xl px-8 pb-6">
-        <div className="flex flex-wrap gap-2 rounded-2xl bg-dark-surface p-2 ring-1 ring-dark-border">
-          <button
-            onClick={() => setFocus('all')}
-            className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
-              focus === 'all'
-                ? 'bg-sf-cobalt text-white shadow-lg shadow-sf-cobalt/30'
-                : 'text-dark-inkMuted hover:text-dark-ink'
-            }`}
-          >
-            All threads lit
-          </button>
-          {archThreads.map((v) => {
-            const isActive = v.id === focus;
+      {/* View toggle */}
+      <section className="relative mx-auto max-w-7xl px-8 pb-4">
+        <div className="inline-flex items-center gap-1 rounded-full bg-dark-surface p-1.5 ring-1 ring-dark-border">
+          {VIEWS.map((v) => {
+            const isActive = v.key === viewKey;
             return (
               <button
-                key={v.id}
-                onClick={() => setFocus(v.id)}
+                key={v.key}
+                onClick={() => setViewKey(v.key)}
+                aria-pressed={isActive}
                 className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
                   isActive
                     ? 'bg-sf-cobalt text-white shadow-lg shadow-sf-cobalt/30'
                     : 'text-dark-inkMuted hover:text-dark-ink'
                 }`}
               >
-                {v.pill}
+                {v.label}
               </button>
             );
           })}
         </div>
+        <p className="mt-4 max-w-3xl border-l-2 border-phos-400/40 pl-4 text-sm italic leading-[1.6] text-dark-ink/85">
+          {view.blurb}
+        </p>
       </section>
 
       {/* Architecture stack */}
-      <section className="relative mx-auto max-w-7xl px-4 pb-24 sm:px-8">
+      <section
+        key={view.key}
+        className="relative mx-auto max-w-7xl animate-fade-in px-4 pb-24 sm:px-8"
+      >
         {/* Inside-the-boundary marker: the four Salesforce bands all sit
             within the governed estate. */}
         <div className="mb-3 grid grid-cols-[140px_1fr_140px] gap-3 md:grid-cols-[160px_1fr_160px]">
@@ -122,7 +116,7 @@ export default function ArchitecturePage() {
         </div>
 
         <div className="space-y-3">
-          {bands
+          {[...view.bands]
             .sort((a, b) => a.index - b.index)
             .map((band) => (
               <div
@@ -181,13 +175,10 @@ export default function ArchitecturePage() {
 
                   <div className="mt-4 grid grid-cols-1 items-stretch gap-2 sm:grid-cols-2 lg:grid-cols-3">
                     {band.components.map((c) => {
-                      const lit = isLit(band, c.label);
                       return (
                         <div
                           key={c.label}
-                          className={`flex h-full items-start gap-2 rounded-xl bg-slate-50 px-3 py-2 text-light-ink ring-1 ring-slate-200 transition-opacity duration-300 ${
-                            lit ? 'opacity-100' : 'opacity-30'
-                          }`}
+                          className="flex h-full items-start gap-2 rounded-xl bg-slate-50 px-3 py-2 text-light-ink ring-1 ring-slate-200"
                         >
                           {c.icon ? (
                             // eslint-disable-next-line @next/next/no-img-element

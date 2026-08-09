@@ -166,6 +166,86 @@ export const bands: ArchBand[] = [
   }
 ];
 
+// The Agentic Media view: the same four-band estate, described as the operating
+// MODEL rather than the named Salesforce products. Second toggle on
+// /architecture, alongside `bands`. No `beats`: this view has no thread
+// switcher, it is a static operating-model diagram. Nine-specific: the
+// engagement and work bands carry the converged premium portfolio (BVOD,
+// premium display, print, linear, and out-of-home through QMS).
+export const agenticBands: ArchBand[] = [
+  {
+    key: 'engagement',
+    index: 1,
+    rail: 'System of engagement',
+    capability: 'Any surface · headless',
+    title: 'Sellers and advertisers, on their channel',
+    subline: 'The engagement layer is pluggable: the same agents and the same work are reached wherever the person already is.',
+    surfaces: [
+      { name: 'Slack', logo: '/icons/slack-3d.png' },
+      { name: 'Salesforce', logo: '/icons/salesforce.svg' },
+      { name: 'Gemini' },
+      { name: 'Claude' },
+      { name: 'Voice' }
+    ],
+    tone: '#0d61f2',
+    components: [
+      { label: 'Meeting capture', caption: 'The face-to-face conversation, captured where it happens' },
+      { label: 'Seller workspace', caption: 'The book of business, wherever the seller works' },
+      { label: 'Agency self-service portal', caption: 'Partners run the same agents themselves (Nine Ad Manager)' },
+      { label: 'Team channel & approvals', caption: 'Agents post, hand off and get sign-off' }
+    ]
+  },
+  {
+    key: 'agency',
+    index: 2,
+    rail: 'System of agency',
+    capability: 'Any agent · MCP · A2A',
+    title: 'Agents coordinate the deal',
+    subline: 'Digital workers do the repeatable work and hand people the decisions, grounded in CRM context and governed at every step.',
+    tone: '#0d61f2',
+    components: [
+      { label: 'Meeting intelligence', caption: 'Summary, signals, objections, next steps, the brief' },
+      { label: 'RFP intake & deal stand-up', caption: 'Reads the brief, stands up the Opportunity + records' },
+      { label: 'Account briefing', caption: 'Assembles who the advertiser is and what they have run' },
+      { label: 'Proposal & schedule optimiser', caption: 'Builds the converged plan for reach against the objective' },
+      { label: 'Inventory advisor', caption: 'Audience-to-inventory answers, adds lines to the plan' },
+      { label: 'Performance monitor', caption: 'Watches delivery, names drift before anyone asks' }
+    ]
+  },
+  {
+    key: 'work',
+    index: 3,
+    rail: 'System of work',
+    capability: 'Any app',
+    title: 'One converged commercial and inventory motion',
+    subline: 'CRM, planning, order management and analytics share governed context, with availability and reservations coordinated across the whole portfolio.',
+    tone: '#5b8def',
+    components: [
+      { label: 'Opportunity & records', caption: 'The deal, assembled in one system' },
+      { label: 'Ad Sales Command Center', caption: 'The book of business; agents already at work' },
+      { label: 'Converged media plan', caption: 'BVOD, premium display, print, linear and out-of-home (QMS) as one buy' },
+      { label: 'Quote, proposal & order', caption: 'The plan priced, bookable and trafficked' },
+      { label: 'Performance & billing', caption: 'Live delivery, reconciliation and revenue' }
+    ]
+  },
+  {
+    key: 'context',
+    index: 4,
+    rail: 'System of context',
+    capability: 'Any data lake or warehouse',
+    title: 'The same trusted context, everywhere',
+    subline: 'Unify conversation, account, audience and performance signals so people and agents act from the same current picture.',
+    tone: '#3d8bfe',
+    components: [
+      { label: 'Conversation signals', caption: 'Every captured call, harmonised into the customer picture' },
+      { label: 'Account & campaign history', caption: 'What this advertiser has run before' },
+      { label: 'Audience graph', caption: 'Who, where, when, feeding the targeting' },
+      { label: 'Live performance feed', caption: 'Pacing and delivery across every channel, real time' },
+      { label: 'Federation · zero copy · real time', caption: 'The warehouse you already run, retained' }
+    ]
+  }
+];
+
 // The Trust Layer: the membrane between the governed Salesforce estate and
 // any external model. This is the headline message of the whole diagram, so
 // it gets its own structure rather than being a peer band.

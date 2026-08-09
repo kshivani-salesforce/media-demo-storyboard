@@ -21,6 +21,7 @@ type NavItem = { label: string; href: string; num?: string; glyph?: string };
 function useNavItems(): NavItem[] {
   return [
     { label: 'Home', href: '/', glyph: '⌂' },
+    { label: 'The cast', href: '/cast', glyph: '☺' },
     ...chapters.map((c, i) => ({
       label: `Chapter ${c.numeral}`,
       href: `/story/${i + 1}`,

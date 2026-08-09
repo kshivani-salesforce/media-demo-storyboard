@@ -10,6 +10,7 @@ import { chapters } from '@/lib/story';
 
 export type NavKey =
   | 'home'
+  | 'cast'
   | 'chapter-1'
   | 'chapter-2'
   | 'chapter-3'
@@ -18,6 +19,7 @@ export type NavKey =
 
 const TABS: { key: NavKey; label: string; href: string }[] = [
   { key: 'home', label: 'Home', href: '/' },
+  { key: 'cast', label: 'The cast', href: '/cast' },
   ...chapters.map((c, i) => ({
     key: `chapter-${i + 1}` as NavKey,
     label: `Ch. ${c.numeral}`,
